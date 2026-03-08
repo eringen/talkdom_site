@@ -14,14 +14,14 @@
       <div receiver="demo1" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px]">
         <span class="text-sm text-gray-500">Content will appear here...</span>
       </div>
-      <button sender="demo1 get:apply: /partials/demos/hello.html inner" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
+      <button sender="demo1 get: /partials/demos/hello.html apply: inner" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
         Load Content
       </button>
       <details class="mt-3">
         <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
         <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="demo1"&gt;Content will appear here...&lt;/div&gt;
 
-&lt;button sender="demo1 get:apply: /partials/demos/hello.html inner"&gt;
+&lt;button sender="demo1 get: /partials/demos/hello.html apply: inner"&gt;
   Load Content
 &lt;/button&gt;</pre>
       </details>
@@ -37,14 +37,14 @@
       <p class="text-sm text-gray-400">Each click appends new content without removing existing content.</p>
       <div receiver="demo2" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px] space-y-1">
       </div>
-      <button sender="demo2 get:apply: /partials/demos/counter.html append" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
+      <button sender="demo2 get: /partials/demos/counter.html apply: append" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
         Append Entry
       </button>
       <details class="mt-3">
         <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
         <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="demo2"&gt;&lt;/div&gt;
 
-&lt;button sender="demo2 get:apply: /partials/demos/counter.html append"&gt;
+&lt;button sender="demo2 get: /partials/demos/counter.html apply: append"&gt;
   Append Entry
 &lt;/button&gt;</pre>
       </details>
@@ -96,7 +96,7 @@
           </div>
         </div>
       </div>
-      <button sender="demo4a get:apply: /partials/demos/hello.html inner; demo4b get:apply: /partials/demos/counter.html inner" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
+      <button sender="demo4a get: /partials/demos/hello.html apply: inner; demo4b get: /partials/demos/counter.html apply: inner" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
         Load Both
       </button>
       <details class="mt-3">
@@ -104,8 +104,8 @@
         <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="demo4a"&gt;Empty&lt;/div&gt;
 &lt;div receiver="demo4b"&gt;Empty&lt;/div&gt;
 
-&lt;button sender="demo4a get:apply: /partials/demos/hello.html inner;
-               demo4b get:apply: /partials/demos/counter.html inner"&gt;
+&lt;button sender="demo4a get: /partials/demos/hello.html apply: inner;
+               demo4b get: /partials/demos/counter.html apply: inner"&gt;
   Load Both
 &lt;/button&gt;</pre>
       </details>
@@ -159,7 +159,7 @@ talkDOM.methods["toggle:"] = function(el, cls) {
       <div receiver="demo6" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px]">
         <span class="text-sm text-gray-300">Click the button and confirm to replace this content.</span>
       </div>
-      <button sender="demo6 confirm: Replace content? Are you sure? | demo6 get:apply: /partials/demos/hello.html inner" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
+      <button sender="demo6 confirm: Replace content? Are you sure? | demo6 get: /partials/demos/hello.html apply: inner" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
         Confirm &amp; Load
       </button>
       <details class="mt-3">
@@ -168,7 +168,7 @@ talkDOM.methods["toggle:"] = function(el, cls) {
   Click the button and confirm to replace this content.
 &lt;/div&gt;
 
-&lt;button sender="demo6 confirm: Replace content? | demo6 get:apply: /partials/demos/hello.html inner"&gt;
+&lt;button sender="demo6 confirm: Replace content? | demo6 get: /partials/demos/hello.html apply: inner"&gt;
   Confirm &amp; Load
 &lt;/button&gt;</pre>
       </details>
@@ -185,14 +185,14 @@ talkDOM.methods["toggle:"] = function(el, cls) {
       <div receiver="demo7" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px]">
         <span class="text-sm text-gray-500">Waiting for programmatic send...</span>
       </div>
-      <button onclick="talkDOM.send('demo7 get:apply: /partials/demos/hello.html inner')" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
+      <button onclick="talkDOM.send('demo7 get: /partials/demos/hello.html apply: inner')" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
         talkDOM.send()
       </button>
       <details class="mt-3">
         <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
         <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="demo7"&gt;Waiting for programmatic send...&lt;/div&gt;
 
-&lt;button onclick="talkDOM.send('demo7 get:apply: /partials/demos/hello.html inner')"&gt;
+&lt;button onclick="talkDOM.send('demo7 get: /partials/demos/hello.html apply: inner')"&gt;
   talkDOM.send()
 &lt;/button&gt;</pre>
       </details>
