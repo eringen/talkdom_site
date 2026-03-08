@@ -7,6 +7,9 @@
   <meta name="description" content="A lightweight, Smalltalk-inspired DOM manipulation framework. Zero dependencies, message passing syntax, pipes and chains.">
   <link rel="stylesheet" href="/dist/tailwind.css">
   <script src="/talkdom.js"></script>
+  <script>
+    talkDOM.methods["toggle:"] = function(el, cls) { el.classList.toggle(cls); };
+  </script>
 </head>
 <body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col">
 

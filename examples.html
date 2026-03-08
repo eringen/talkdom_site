@@ -7,6 +7,9 @@
   <meta name="description" content="Interactive examples and live demos of talkDOM - Smalltalk-inspired message passing for the DOM.">
   <link rel="stylesheet" href="/dist/tailwind.css">
   <script src="/talkdom.js"></script>
+  <script>
+    talkDOM.methods["toggle:"] = function(el, cls) { el.classList.toggle(cls); };
+  </script>
 </head>
 <body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col">
 
