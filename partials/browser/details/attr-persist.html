@@ -1,0 +1,35 @@
+<div class="p-6 space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold font-mono text-gray-100">persist</h2>
+    <span class="inline-block mt-1 px-2 py-0.5 text-xs uppercase tracking-widest font-semibold text-amber-400 bg-amber-400/10 rounded">Attribute</span>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Description</h3>
+    <p class="text-gray-300 leading-relaxed">Saves receiver content to localStorage after every apply operation. Content is automatically restored on page load.</p>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Syntax</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200">&lt;div receiver="sidebar" persist&gt;&lt;/div&gt;</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Example</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;!-- User preferences persist across page reloads --&gt;
+&lt;div receiver="theme" persist&gt;light&lt;/div&gt;
+
+&lt;button sender="theme apply: dark text"&gt;Dark Mode&lt;/button&gt;
+&lt;button sender="theme apply: light text"&gt;Light Mode&lt;/button&gt;</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Notes</h3>
+    <ul class="list-disc list-inside text-sm text-gray-400 space-y-1">
+      <li>Boolean attribute &mdash; no value needed</li>
+      <li>Stored under localStorage key <code class="font-mono text-amber-400/80">"talkDOM:&lt;name&gt;"</code></li>
+      <li>Stores both the content and the operation type (inner or outer)</li>
+      <li>Restored automatically via <code class="font-mono text-amber-400/80">innerHTML</code> or <code class="font-mono text-amber-400/80">outerHTML</code> on page load</li>
+    </ul>
+  </div>
+</div>

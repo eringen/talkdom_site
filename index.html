@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-gray-950">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>talkDOM - Smalltalk-inspired message passing for the DOM</title>
+  <meta name="description" content="A lightweight, Smalltalk-inspired DOM manipulation framework. Zero dependencies, message passing syntax, pipes and chains.">
+  <link rel="stylesheet" href="/dist/tailwind.css">
+  <script src="/talkdom.js"></script>
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-950/90 backdrop-blur border-b border-gray-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <a href="/" sender="content get: /partials/home-content.html apply: inner" push-url="/" class="text-xl tracking-tight">
+          <span class="font-normal">talk</span><span class="font-bold border-b-2 border-amber-400">DOM</span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="/docs.html" sender="content get: /partials/docs-content.html apply: inner" push-url="/docs.html"
+             class="text-gray-300 hover:text-amber-400 transition-colors text-sm font-medium">Docs</a>
+          <a href="/browser.html" sender="content get: /partials/browser-content.html apply: inner" push-url="/browser.html"
+             class="text-gray-300 hover:text-amber-400 transition-colors text-sm font-medium">Browser</a>
+          <a href="/examples.html" sender="content get: /partials/examples-content.html apply: inner" push-url="/examples.html"
+             class="text-gray-300 hover:text-amber-400 transition-colors text-sm font-medium">Examples</a>
+          <a href="https://github.com/eringen/talkdom" target="_blank" rel="noopener noreferrer"
+             class="text-gray-300 hover:text-amber-400 transition-colors text-sm font-medium">GitHub
+            <svg class="inline-block w-3.5 h-3.5 ml-1 -mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Mobile hamburger -->
+        <div class="md:hidden">
+          <input type="checkbox" id="mobile-menu-toggle" class="hidden peer">
+          <label for="mobile-menu-toggle" class="cursor-pointer text-gray-300 hover:text-amber-400 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu (checkbox hack) -->
+    <div class="md:hidden max-h-0 overflow-hidden peer-checked:max-h-64 transition-all duration-300 border-t border-gray-800">
+      <div class="px-4 py-4 space-y-3">
+        <a href="/docs.html" sender="content get: /partials/docs-content.html apply: inner" push-url="/docs.html"
+           class="block text-gray-300 hover:text-amber-400 transition-colors text-sm font-medium">Docs</a>
+        <a href="/browser.html" sender="content get: /partials/browser-content.html apply: inner" push-url="/browser.html"
+           class="block text-gray-300 hover:text-amber-400 transition-colors text-sm font-medium">Browser</a>
+        <a href="/examples.html" sender="content get: /partials/examples-content.html apply: inner" push-url="/examples.html"
+           class="block text-gray-300 hover:text-amber-400 transition-colors text-sm font-medium">Examples</a>
+        <a href="https://github.com/eringen/talkdom" target="_blank" rel="noopener noreferrer"
+           class="block text-gray-300 hover:text-amber-400 transition-colors text-sm font-medium">GitHub
+          <svg class="inline-block w-3.5 h-3.5 ml-1 -mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="content" receiver="content" class="pt-16">
+
+    <!-- Hero Section -->
+    <section class="py-24 sm:py-32 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-5xl sm:text-7xl font-bold tracking-tight mb-6">
+          <span class="font-light">talk</span><span class="border-b-4 border-amber-400 pb-1">DOM</span>
+        </h1>
+        <p class="text-xl sm:text-2xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+          Smalltalk-inspired message passing for the DOM
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="/docs.html" sender="content get: /partials/docs-content.html apply: inner" push-url="/docs.html"
+             class="inline-block px-8 py-3 bg-amber-400 text-gray-950 font-semibold rounded-lg hover:bg-amber-300 transition-colors text-sm">
+            Get Started
+          </a>
+          <a href="/browser.html" sender="content get: /partials/browser-content.html apply: inner" push-url="/browser.html"
+             class="inline-block px-8 py-3 border border-gray-700 text-gray-300 font-semibold rounded-lg hover:border-amber-400 hover:text-amber-400 transition-colors text-sm">
+            Browse API
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature Grid -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Zero Dependencies -->
+          <div class="border border-gray-800 rounded-xl p-6 hover:border-gray-700 transition-colors">
+            <h3 class="text-lg font-semibold text-amber-400 mb-2">Zero Dependencies</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              No npm, no build tools. One script tag and you're ready to go.
+            </p>
+          </div>
+
+          <!-- Message Passing -->
+          <div class="border border-gray-800 rounded-xl p-6 hover:border-gray-700 transition-colors">
+            <h3 class="text-lg font-semibold text-amber-400 mb-2">Message Passing</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Smalltalk keyword syntax for DOM communication. Elements send and receive messages by name.
+            </p>
+          </div>
+
+          <!-- Pipes & Chains -->
+          <div class="border border-gray-800 rounded-xl p-6 hover:border-gray-700 transition-colors">
+            <h3 class="text-lg font-semibold text-amber-400 mb-2">Pipes &amp; Chains</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Sequential <code class="text-gray-300 bg-gray-900 px-1.5 py-0.5 rounded text-xs">|</code> and parallel <code class="text-gray-300 bg-gray-900 px-1.5 py-0.5 rounded text-xs">;</code> message composition.
+            </p>
+          </div>
+
+          <!-- Server Triggers -->
+          <div class="border border-gray-800 rounded-xl p-6 hover:border-gray-700 transition-colors">
+            <h3 class="text-lg font-semibold text-amber-400 mb-2">Server Triggers</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Drive client-side updates from HTTP response headers. The server can talk back.
+            </p>
+          </div>
+
+          <!-- Extensible -->
+          <div class="border border-gray-800 rounded-xl p-6 hover:border-gray-700 transition-colors">
+            <h3 class="text-lg font-semibold text-amber-400 mb-2">Extensible</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Register custom methods at runtime with <code class="text-gray-300 bg-gray-900 px-1.5 py-0.5 rounded text-xs">talkDOM.methods</code>.
+            </p>
+          </div>
+
+          <!-- URL History -->
+          <div class="border border-gray-800 rounded-xl p-6 hover:border-gray-700 transition-colors">
+            <h3 class="text-lg font-semibold text-amber-400 mb-2">URL History</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              <code class="text-gray-300 bg-gray-900 px-1.5 py-0.5 rounded text-xs">push-url</code> keeps the browser history in sync with SPA navigation.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Start -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold text-center mb-8">Quick Start</h2>
+        <div class="bg-gray-900 border border-gray-700 rounded-xl overflow-hidden">
+          <div class="flex items-center px-4 py-2 border-b border-gray-700">
+            <span class="text-xs text-gray-500 font-mono">index.html</span>
+          </div>
+          <pre class="p-6 overflow-x-auto text-sm leading-relaxed"><code class="text-gray-300">&lt;<span class="text-amber-400">script</span> <span class="text-gray-500">src=</span><span class="text-green-400">"talkdom.js"</span>&gt;&lt;/<span class="text-amber-400">script</span>&gt;
+
+&lt;<span class="text-amber-400">div</span> <span class="text-gray-500">receiver=</span><span class="text-green-400">"content"</span>&gt;&lt;/<span class="text-amber-400">div</span>&gt;
+&lt;<span class="text-amber-400">button</span> <span class="text-gray-500">sender=</span><span class="text-green-400">"content get: /hello.html apply: inner"</span>&gt;
+  Load
+&lt;/<span class="text-amber-400">button</span>&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-gray-800 py-8 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+        <span>MIT License</span>
+        <div class="flex items-center gap-6">
+          <a href="https://eringen.com" target="_blank" rel="noopener noreferrer"
+             class="hover:text-amber-400 transition-colors">eringen.com</a>
+          <a href="https://github.com/eringen/talkdom" target="_blank" rel="noopener noreferrer"
+             class="hover:text-amber-400 transition-colors">
+            GitHub
+            <svg class="inline-block w-3.5 h-3.5 ml-1 -mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<div class="p-6 space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold font-mono text-gray-100">confirm:</h2>
+    <span class="inline-block mt-1 px-2 py-0.5 text-xs uppercase tracking-widest font-semibold text-amber-400 bg-amber-400/10 rounded">Control Method</span>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Description</h3>
+    <p class="text-gray-300 leading-relaxed">Shows a browser confirmation dialog. If the user clicks Cancel, the message chain is aborted by rejecting the Promise with "cancelled".</p>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Syntax</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200">receiver confirm: &lt;message text&gt;</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Example</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;!-- Confirm before deleting --&gt;
+&lt;button sender="item confirm: Are you sure? | item delete:apply: /api/item/1 outer"&gt;
+  Delete Item
+&lt;/button&gt;</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Notes</h3>
+    <ul class="list-disc list-inside text-sm text-gray-400 space-y-1">
+      <li>Place at the beginning of a pipe chain to gate destructive operations</li>
+      <li>Uses the native <code class="font-mono text-amber-400/80">confirm()</code> dialog</li>
+      <li>If cancelled, subsequent piped steps are skipped entirely</li>
+      <li>The message text is the full argument after <code class="font-mono text-amber-400/80">confirm:</code></li>
+    </ul>
+  </div>
+</div>

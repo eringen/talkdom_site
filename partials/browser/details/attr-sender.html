@@ -1,0 +1,41 @@
+<div class="p-6 space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold font-mono text-gray-100">sender</h2>
+    <span class="inline-block mt-1 px-2 py-0.5 text-xs uppercase tracking-widest font-semibold text-amber-400 bg-amber-400/10 rounded">Attribute</span>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Description</h3>
+    <p class="text-gray-300 leading-relaxed">Makes an element dispatch talkDOM messages on click. The attribute value is the full message string, following Smalltalk keyword syntax.</p>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Syntax</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200">&lt;button sender="receiver method: arg"&gt;Click me&lt;/button&gt;
+
+&lt;!-- With pipes --&gt;
+&lt;button sender="content get: /url | content apply: inner"&gt;Load&lt;/button&gt;
+
+&lt;!-- With parallel chains --&gt;
+&lt;button sender="a get:apply: /x inner; b get:apply: /y inner"&gt;Both&lt;/button&gt;</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Example</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;a href="/docs"
+   sender="content get:apply: /partials/docs.html inner"
+   push-url="/docs"&gt;
+  Docs
+&lt;/a&gt;</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Notes</h3>
+    <ul class="list-disc list-inside text-sm text-gray-400 space-y-1">
+      <li>Works on any element, not just buttons or links</li>
+      <li>Click events are delegated &mdash; uses <code class="font-mono text-amber-400/80">closest("[sender]")</code></li>
+      <li>Prevents default click behavior (e.g., link navigation)</li>
+      <li>Combine with <code class="font-mono text-amber-400/80">push-url</code> for SPA-style navigation</li>
+    </ul>
+  </div>
+</div>

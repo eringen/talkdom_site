@@ -1,0 +1,53 @@
+<div class="p-6 space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold font-mono text-gray-100">talkDOM.methods</h2>
+    <span class="inline-block mt-1 px-2 py-0.5 text-xs uppercase tracking-widest font-semibold text-amber-400 bg-amber-400/10 rounded">Programmatic API</span>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Description</h3>
+    <p class="text-gray-300 leading-relaxed">Register custom methods that can be used in sender messages. Methods receive the target element and parsed arguments. The method name must end with a colon.</p>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Signature</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200">talkDOM.methods["name:"] = function(el, arg1, arg2, ...) { ... }</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Examples</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">// Toggle a CSS class
+talkDOM.methods["toggle:"] = function(el, cls) {
+  el.classList.toggle(cls);
+};
+// Usage: &lt;button sender="menu toggle: hidden"&gt;Toggle&lt;/button&gt;
+
+// Add a CSS class
+talkDOM.methods["addClass:"] = function(el, cls) {
+  el.classList.add(cls);
+};
+
+// Remove element with animation
+talkDOM.methods["fadeOut:"] = function(el, duration) {
+  el.style.transition = "opacity " + duration;
+  el.style.opacity = "0";
+  setTimeout(function() { el.remove(); }, parseFloat(duration) * 1000);
+};
+
+// Multi-keyword method
+talkDOM.methods["set:to:"] = function(el, attr, value) {
+  el.setAttribute(attr, value);
+};</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Notes</h3>
+    <ul class="list-disc list-inside text-sm text-gray-400 space-y-1">
+      <li>Method name must end with <code class="font-mono text-amber-400/80">:</code> (Smalltalk convention)</li>
+      <li>Multi-keyword methods use compound selectors (e.g., <code class="font-mono text-amber-400/80">"set:to:"</code>)</li>
+      <li>Return a Promise to enable piping and proper lifecycle events</li>
+      <li>The <code class="font-mono text-amber-400/80">el</code> parameter is the receiver element</li>
+      <li>Can override built-in methods (use with caution)</li>
+    </ul>
+  </div>
+</div>

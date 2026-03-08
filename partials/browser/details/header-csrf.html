@@ -1,0 +1,31 @@
+<div class="p-6 space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold font-mono text-gray-100">X-CSRF-Token</h2>
+    <span class="inline-block mt-1 px-2 py-0.5 text-xs uppercase tracking-widest font-semibold text-amber-400 bg-amber-400/10 rounded">Request Header</span>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Description</h3>
+    <p class="text-gray-300 leading-relaxed">CSRF token automatically extracted from a <code class="font-mono text-amber-400/80">&lt;meta&gt;</code> tag and sent with POST, PUT, and DELETE requests. Not sent with GET requests.</p>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Setup</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200">&lt;meta name="csrf-token" content="your-token-here"&gt;</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Header Sent</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200">X-CSRF-Token: your-token-here</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Notes</h3>
+    <ul class="list-disc list-inside text-sm text-gray-400 space-y-1">
+      <li>Only sent with mutating methods: <code class="font-mono text-amber-400/80">post:</code>, <code class="font-mono text-amber-400/80">put:</code>, <code class="font-mono text-amber-400/80">delete:</code></li>
+      <li>Not sent with <code class="font-mono text-amber-400/80">get:</code> requests</li>
+      <li>If no <code class="font-mono text-amber-400/80">&lt;meta name="csrf-token"&gt;</code> is found, the header is omitted</li>
+      <li>Validate this header server-side to prevent cross-site request forgery</li>
+    </ul>
+  </div>
+</div>

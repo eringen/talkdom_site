@@ -1,0 +1,40 @@
+<div class="p-6 space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold font-mono text-gray-100">talkdom:error</h2>
+    <span class="inline-block mt-1 px-2 py-0.5 text-xs uppercase tracking-widest font-semibold text-amber-400 bg-amber-400/10 rounded">Event</span>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Description</h3>
+    <p class="text-gray-300 leading-relaxed">Fires on the receiver element when a message fails &mdash; due to an HTTP error, network failure, or a rejected Promise (e.g., from <code class="font-mono text-amber-400/80">confirm:</code>). Bubbles up the DOM.</p>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Event Detail</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200">{
+  receiver: "content",
+  selector: "get:apply:",
+  args: ["/url", "inner"],
+  error: 404             // HTTP status or error object
+}</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Example</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">document.addEventListener("talkdom:error", function(e) {
+  console.error("Failed:", e.detail.selector, e.detail.error);
+  // Show user-friendly error message
+  var el = document.querySelector('[receiver="' + e.detail.receiver + '"]');
+  if (el) el.innerHTML = '&lt;p class="text-red-400"&gt;Failed to load.&lt;/p&gt;';
+});</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Notes</h3>
+    <ul class="list-disc list-inside text-sm text-gray-400 space-y-1">
+      <li>The <code class="font-mono text-amber-400/80">error</code> field contains the HTTP status code or a network error object</li>
+      <li>For <code class="font-mono text-amber-400/80">confirm:</code> cancellation, error is <code class="font-mono text-amber-400/80">"cancelled"</code></li>
+      <li>Useful for showing fallback UI or retry mechanisms</li>
+    </ul>
+  </div>
+</div>

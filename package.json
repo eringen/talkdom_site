@@ -1,0 +1,8 @@
+{
+  "name": "talkdom-site",
+  "private": true,
+  "devDependencies": {
+    "tailwindcss": "^3.4",
+    "@tailwindcss/typography": "^0.5"
+  }
+}

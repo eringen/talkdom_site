@@ -1,0 +1,39 @@
+<div class="p-6 space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold font-mono text-gray-100">Pipes</h2>
+    <span class="inline-block mt-1 px-2 py-0.5 text-xs uppercase tracking-widest font-semibold text-amber-400 bg-amber-400/10 rounded">Syntax</span>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Description</h3>
+    <p class="text-gray-300 leading-relaxed">The pipe character <code class="font-mono text-amber-400/80">|</code> chains messages sequentially. The return value of each step is passed as the first argument to the next step.</p>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Syntax</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200">step1 | step2 | step3</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Example</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;!-- GET returns response text, piped as content to apply: --&gt;
+&lt;button sender="content get: /page.html | content apply: inner"&gt;
+  Load Page
+&lt;/button&gt;
+
+&lt;!-- Cross-receiver piping: fetch into one, apply to another --&gt;
+&lt;button sender="api get: /data | sidebar apply: append"&gt;
+  Append to Sidebar
+&lt;/button&gt;</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">How It Works</h3>
+    <ul class="list-disc list-inside text-sm text-gray-400 space-y-1">
+      <li>Steps execute left to right, waiting for each Promise to resolve</li>
+      <li>The resolved value becomes the first argument of the next step</li>
+      <li>Each step can target a different receiver</li>
+      <li>If any step rejects (error or cancel), the chain stops</li>
+    </ul>
+  </div>
+</div>

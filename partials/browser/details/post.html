@@ -1,0 +1,37 @@
+<div class="p-6 space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold font-mono text-gray-100">post:</h2>
+    <span class="inline-block mt-1 px-2 py-0.5 text-xs uppercase tracking-widest font-semibold text-amber-400 bg-amber-400/10 rounded">HTTP Method</span>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Description</h3>
+    <p class="text-gray-300 leading-relaxed">Performs an HTTP POST request to the specified URL. Returns the response body as text. Automatically includes a CSRF token from the page's meta tag.</p>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Syntax</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200">receiver post: &lt;url&gt;</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Example</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;meta name="csrf-token" content="abc123"&gt;
+
+&lt;div receiver="result"&gt;&lt;/div&gt;
+
+&lt;button sender="result post: /api/items | result apply: inner"&gt;
+  Create Item
+&lt;/button&gt;</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Notes</h3>
+    <ul class="list-disc list-inside text-sm text-gray-400 space-y-1">
+      <li>Returns a Promise resolving to response text</li>
+      <li>Automatically includes <code class="font-mono text-amber-400/80">X-CSRF-Token</code> header from <code class="font-mono text-amber-400/80">&lt;meta name="csrf-token"&gt;</code></li>
+      <li>Sends all standard talkDOM request headers</li>
+      <li>Use <code class="font-mono text-amber-400/80">post:apply:</code> as a convenient shorthand</li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="max-w-6xl mx-auto px-6 py-8">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-100">API Browser</h1>
+    <p class="mt-1 text-gray-400">Explore the talkDOM API like a Smalltalk System Browser</p>
+  </div>
+  <div class="border border-gray-800 rounded-lg overflow-hidden grid grid-cols-1 md:grid-cols-12" style="min-height:500px">
+    <div class="col-span-1 md:col-span-2 border-r border-gray-800 bg-gray-900/50 overflow-y-auto">
+      <button data-category sender="items get: /partials/browser/categories/http-methods.html apply: inner; detail get: /partials/browser/details/get.html apply: inner" class="block w-full text-left px-3 py-2.5 text-sm text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 border-b border-gray-800/50">HTTP Methods</button>
+      <button data-category sender="items get: /partials/browser/categories/combined-methods.html apply: inner; detail get: /partials/browser/details/get-apply.html apply: inner" class="block w-full text-left px-3 py-2.5 text-sm text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 border-b border-gray-800/50">Combined</button>
+      <button data-category sender="items get: /partials/browser/categories/dom-methods.html apply: inner; detail get: /partials/browser/details/apply.html apply: inner" class="block w-full text-left px-3 py-2.5 text-sm text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 border-b border-gray-800/50">DOM</button>
+      <button data-category sender="items get: /partials/browser/categories/control-methods.html apply: inner; detail get: /partials/browser/details/confirm.html apply: inner" class="block w-full text-left px-3 py-2.5 text-sm text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 border-b border-gray-800/50">Control</button>
+      <button data-category sender="items get: /partials/browser/categories/attributes.html apply: inner; detail get: /partials/browser/details/attr-receiver.html apply: inner" class="block w-full text-left px-3 py-2.5 text-sm text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 border-b border-gray-800/50">Attributes</button>
+      <button data-category sender="items get: /partials/browser/categories/events.html apply: inner; detail get: /partials/browser/details/event-done.html apply: inner" class="block w-full text-left px-3 py-2.5 text-sm text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 border-b border-gray-800/50">Events</button>
+      <button data-category sender="items get: /partials/browser/categories/headers.html apply: inner; detail get: /partials/browser/details/header-request.html apply: inner" class="block w-full text-left px-3 py-2.5 text-sm text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 border-b border-gray-800/50">Headers</button>
+      <button data-category sender="items get: /partials/browser/categories/syntax.html apply: inner; detail get: /partials/browser/details/syntax-keywords.html apply: inner" class="block w-full text-left px-3 py-2.5 text-sm text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 border-b border-gray-800/50">Syntax</button>
+      <button data-category sender="items get: /partials/browser/categories/programmatic.html apply: inner; detail get: /partials/browser/details/api-send.html apply: inner" class="block w-full text-left px-3 py-2.5 text-sm text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 border-b border-gray-800/50">API</button>
+    </div>
+    <div id="items" receiver="items" class="col-span-1 md:col-span-3 border-r border-gray-800 bg-gray-900/30 overflow-y-auto min-h-[500px]">
+      <p class="p-4 text-sm text-gray-500">Select a category</p>
+    </div>
+    <div id="detail" receiver="detail" class="col-span-1 md:col-span-7 bg-gray-950 overflow-y-auto min-h-[500px]">
+      <p class="p-6 text-sm text-gray-500">Select an item to view its documentation</p>
+    </div>
+  </div>
+</div>
+<script>
+document.addEventListener('click', function(e) {
+  var cat = e.target.closest('[data-category]');
+  if (cat) {
+    document.querySelectorAll('[data-category]').forEach(function(el) {
+      el.classList.remove('bg-amber-400/10', 'text-amber-400');
+      el.classList.add('text-gray-400');
+    });
+    cat.classList.add('bg-amber-400/10', 'text-amber-400');
+    cat.classList.remove('text-gray-400');
+  }
+  var item = e.target.closest('[data-item]');
+  if (item) {
+    document.querySelectorAll('[data-item]').forEach(function(el) {
+      el.classList.remove('bg-amber-400/10', 'text-amber-400', 'border-l-2', 'border-l-amber-400');
+      el.classList.add('text-gray-300');
+    });
+    item.classList.add('bg-amber-400/10', 'text-amber-400', 'border-l-2', 'border-l-amber-400');
+    item.classList.remove('text-gray-300');
+  }
+});
+// Auto-select first item when category loads
+document.addEventListener('talkdom:done', function(e) {
+  if (e.detail.receiver === 'items') {
+    var first = document.querySelector('[data-item]');
+    if (first) {
+      first.classList.add('bg-amber-400/10', 'text-amber-400', 'border-l-2', 'border-l-amber-400');
+      first.classList.remove('text-gray-300');
+    }
+  }
+});
+talkDOM.send('items get: /partials/browser/categories/http-methods.html apply: inner; detail get: /partials/browser/details/get.html apply: inner');
+document.querySelector('[data-category]').classList.add('bg-amber-400/10', 'text-amber-400');
+document.querySelector('[data-category]').classList.remove('text-gray-400');
+</script>

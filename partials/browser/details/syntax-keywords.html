@@ -1,0 +1,42 @@
+<div class="p-6 space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold font-mono text-gray-100">Keyword Messages</h2>
+    <span class="inline-block mt-1 px-2 py-0.5 text-xs uppercase tracking-widest font-semibold text-amber-400 bg-amber-400/10 rounded">Syntax</span>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Description</h3>
+    <p class="text-gray-300 leading-relaxed">talkDOM uses Smalltalk keyword message syntax. A message starts with the receiver name, followed by keyword:argument pairs. Keywords always end with a colon. Multiple keywords form a compound selector.</p>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Syntax</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200">receiver keyword: arg
+receiver keyword: arg keyword: arg</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Parsing Rules</h3>
+    <ul class="list-disc list-inside text-sm text-gray-400 space-y-1">
+      <li>First token is always the <strong class="text-gray-200">receiver name</strong></li>
+      <li>Tokens ending with <code class="font-mono text-amber-400/80">:</code> are <strong class="text-gray-200">keywords</strong></li>
+      <li>Everything between keywords fills <strong class="text-gray-200">arguments</strong></li>
+      <li>Keywords are joined to form the <strong class="text-gray-200">selector</strong> (e.g., <code class="font-mono text-amber-400/80">get:apply:</code>)</li>
+    </ul>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Examples</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;!-- Single keyword --&gt;
+content get: /page.html
+&rarr; receiver: "content", selector: "get:", args: ["/page.html"]
+
+&lt;!-- Compound keywords --&gt;
+content get:apply: /page.html inner
+&rarr; receiver: "content", selector: "get:apply:", args: ["/page.html", "inner"]
+
+&lt;!-- Multi-word argument --&gt;
+dialog confirm: Are you sure you want to delete?
+&rarr; receiver: "dialog", selector: "confirm:", args: ["Are you sure you want to delete?"]</pre>
+  </div>
+</div>

@@ -1,0 +1,254 @@
+<div class="max-w-3xl mx-auto px-6 py-12">
+
+  <h1 class="text-4xl font-bold text-gray-100 mb-2">Documentation</h1>
+  <p class="text-gray-400 mb-12">Everything you need to know about talkDOM.</p>
+
+  <!-- Table of Contents -->
+  <nav class="mb-12 border border-gray-800 rounded-lg p-6 bg-gray-900/50">
+    <h2 class="text-sm font-semibold text-amber-400 uppercase tracking-wider mb-3">On this page</h2>
+    <ul class="space-y-1 text-sm">
+      <li><a href="#installation" class="text-gray-400 hover:text-gray-100">Installation</a></li>
+      <li><a href="#core-concepts" class="text-gray-400 hover:text-gray-100">Core Concepts</a></li>
+      <li><a href="#apply-operations" class="text-gray-400 hover:text-gray-100">Apply Operations</a></li>
+      <li><a href="#http-methods" class="text-gray-400 hover:text-gray-100">HTTP Methods</a></li>
+      <li><a href="#message-composition" class="text-gray-400 hover:text-gray-100">Message Composition</a></li>
+      <li><a href="#url-history" class="text-gray-400 hover:text-gray-100">URL History</a></li>
+      <li><a href="#polling" class="text-gray-400 hover:text-gray-100">Polling</a></li>
+      <li><a href="#persistence" class="text-gray-400 hover:text-gray-100">Persistence</a></li>
+      <li><a href="#server-triggers" class="text-gray-400 hover:text-gray-100">Server Triggers</a></li>
+      <li><a href="#request-headers" class="text-gray-400 hover:text-gray-100">Request Headers</a></li>
+      <li><a href="#lifecycle-events" class="text-gray-400 hover:text-gray-100">Lifecycle Events</a></li>
+      <li><a href="#programmatic-api" class="text-gray-400 hover:text-gray-100">Programmatic API</a></li>
+    </ul>
+  </nav>
+
+  <!-- Installation -->
+  <section id="installation" class="mb-16">
+    <h2 class="text-2xl font-bold text-gray-100 mb-4">Installation</h2>
+    <p class="text-gray-300 mb-4">Add a single script tag. No build tools, no dependencies, no configuration.</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200"><code>&lt;script src="talkdom.js"&gt;&lt;/script&gt;</code></pre>
+    <p class="text-gray-400 text-sm mt-3">That's it. talkDOM is ready to use.</p>
+  </section>
+
+  <!-- Core Concepts -->
+  <section id="core-concepts" class="mb-16">
+    <h2 class="text-2xl font-bold text-gray-100 mb-4">Core Concepts</h2>
+    <p class="text-gray-300 mb-4">talkDOM uses two HTML attributes to wire up interactions: <code class="text-amber-400">receiver</code> and <code class="text-amber-400">sender</code>.</p>
+
+    <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Receivers</h3>
+    <p class="text-gray-300 mb-3">A <code class="text-amber-400">receiver</code> attribute marks an element as a message target. The value is the receiver's name.</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4"><code>&lt;div receiver="content"&gt;&lt;/div&gt;</code></pre>
+
+    <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Senders</h3>
+    <p class="text-gray-300 mb-3">A <code class="text-amber-400">sender</code> attribute makes an element dispatch messages on click. Messages follow Smalltalk keyword syntax:</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-2"><code>receiver keyword: arg keyword: arg</code></pre>
+    <p class="text-gray-400 text-sm mb-4">The first word is the receiver name, followed by keyword-argument pairs.</p>
+
+    <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Example</h3>
+    <p class="text-gray-300 mb-3">Click the button to fetch <code class="text-amber-400">/page.html</code> and insert its content into the receiver:</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200"><code>&lt;div receiver="content"&gt;&lt;/div&gt;
+&lt;button sender="content get: /page.html apply: inner"&gt;Load&lt;/button&gt;</code></pre>
+  </section>
+
+  <!-- Apply Operations -->
+  <section id="apply-operations" class="mb-16">
+    <h2 class="text-2xl font-bold text-gray-100 mb-4">Apply Operations</h2>
+    <p class="text-gray-300 mb-4">The <code class="text-amber-400">apply:</code> keyword determines how fetched content is inserted into the receiver. Four modes are available:</p>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm text-left border border-gray-700 rounded-lg overflow-hidden">
+        <thead class="bg-gray-900 text-gray-300">
+          <tr>
+            <th class="px-4 py-3 font-semibold">Mode</th>
+            <th class="px-4 py-3 font-semibold">Behavior</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-800">
+          <tr class="bg-gray-950">
+            <td class="px-4 py-3 font-mono text-amber-400">inner</td>
+            <td class="px-4 py-3 text-gray-300">Replaces <code>innerHTML</code></td>
+          </tr>
+          <tr class="bg-gray-950">
+            <td class="px-4 py-3 font-mono text-amber-400">text</td>
+            <td class="px-4 py-3 text-gray-300">Sets <code>textContent</code></td>
+          </tr>
+          <tr class="bg-gray-950">
+            <td class="px-4 py-3 font-mono text-amber-400">append</td>
+            <td class="px-4 py-3 text-gray-300">Appends via <code>insertAdjacentHTML</code></td>
+          </tr>
+          <tr class="bg-gray-950">
+            <td class="px-4 py-3 font-mono text-amber-400">outer</td>
+            <td class="px-4 py-3 text-gray-300">Replaces the receiver element itself via <code>outerHTML</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Restricting operations</h3>
+    <p class="text-gray-300 mb-3">Use the <code class="text-amber-400">accepts</code> attribute to restrict which operations a receiver allows:</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200"><code>&lt;div receiver="output" accepts="text inner"&gt;&lt;/div&gt;</code></pre>
+    <p class="text-gray-400 text-sm mt-2">This receiver will reject <code>append</code> and <code>outer</code> operations.</p>
+  </section>
+
+  <!-- HTTP Methods -->
+  <section id="http-methods" class="mb-16">
+    <h2 class="text-2xl font-bold text-gray-100 mb-4">HTTP Methods</h2>
+    <p class="text-gray-300 mb-4">talkDOM supports four HTTP keywords. Each takes a URL and returns the response text:</p>
+
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4"><code>get:    &rarr; GET request
+post:   &rarr; POST request
+put:    &rarr; PUT request
+delete: &rarr; DELETE request</code></pre>
+
+    <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Combined fetch + apply</h3>
+    <p class="text-gray-300 mb-3">Combine an HTTP method with <code class="text-amber-400">apply:</code> in a single message to fetch and insert in one step:</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200"><code>&lt;!-- GET and replace inner HTML --&gt;
+&lt;button sender="feed get: /api/posts apply: inner"&gt;Refresh&lt;/button&gt;
+
+&lt;!-- POST and append the response --&gt;
+&lt;button sender="feed post: /api/posts apply: append"&gt;Add&lt;/button&gt;
+
+&lt;!-- DELETE and replace outer HTML (removes element) --&gt;
+&lt;button sender="item delete: /api/posts/1 apply: outer"&gt;Remove&lt;/button&gt;</code></pre>
+  </section>
+
+  <!-- Message Composition -->
+  <section id="message-composition" class="mb-16">
+    <h2 class="text-2xl font-bold text-gray-100 mb-4">Message Composition</h2>
+    <p class="text-gray-300 mb-4">Messages can be composed using pipes and semicolons for complex workflows.</p>
+
+    <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Pipes &mdash; sequential chaining</h3>
+    <p class="text-gray-300 mb-3">The <code class="text-amber-400">|</code> operator chains messages sequentially. The result of each step is passed to the next:</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4"><code>&lt;button sender="content get: /search | content apply: inner"&gt;
+  Search
+&lt;/button&gt;</code></pre>
+
+    <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Semicolons &mdash; parallel independent chains</h3>
+    <p class="text-gray-300 mb-3">The <code class="text-amber-400">;</code> operator runs multiple independent message chains in parallel:</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200"><code>&lt;button sender="sidebar get: /nav apply: inner; main get: /home apply: inner"&gt;
+  Reset
+&lt;/button&gt;</code></pre>
+    <p class="text-gray-400 text-sm mt-2">Both fetches happen simultaneously. Neither depends on the other.</p>
+  </section>
+
+  <!-- URL History -->
+  <section id="url-history" class="mb-16">
+    <h2 class="text-2xl font-bold text-gray-100 mb-4">URL History</h2>
+    <p class="text-gray-300 mb-4">The <code class="text-amber-400">push-url</code> attribute on a sender updates the browser's URL via <code>history.pushState</code> when the message is dispatched:</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4"><code>&lt;a href="/about"
+   sender="content get: /partials/about.html apply: inner"
+   push-url="/about"&gt;
+  About
+&lt;/a&gt;</code></pre>
+    <p class="text-gray-300 mb-3">When the user navigates back or forward with browser buttons, talkDOM replays the associated sender message, restoring the page state without a full reload.</p>
+    <p class="text-gray-400 text-sm">The <code>href</code> serves as a fallback for non-JS environments and right-click "open in new tab".</p>
+  </section>
+
+  <!-- Polling -->
+  <section id="polling" class="mb-16">
+    <h2 class="text-2xl font-bold text-gray-100 mb-4">Polling</h2>
+    <p class="text-gray-300 mb-4">Receivers can automatically refresh their content at a set interval using the <code class="text-amber-400">poll:</code> keyword in the receiver attribute:</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4"><code>&lt;div receiver="status get: /api/status apply: inner poll: 5s"&gt;&lt;/div&gt;</code></pre>
+    <p class="text-gray-300 mb-3">This fetches <code>/api/status</code> every 5 seconds and replaces the element's inner HTML with the response.</p>
+    <p class="text-gray-400 text-sm">Polling stops automatically when the element is removed from the DOM.</p>
+  </section>
+
+  <!-- Persistence -->
+  <section id="persistence" class="mb-16">
+    <h2 class="text-2xl font-bold text-gray-100 mb-4">Persistence</h2>
+    <p class="text-gray-300 mb-4">Add the <code class="text-amber-400">persist</code> attribute to a receiver to save its content to <code>localStorage</code>:</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4"><code>&lt;div receiver="preferences" persist&gt;&lt;/div&gt;</code></pre>
+    <p class="text-gray-300">Content is saved whenever it changes and restored automatically on page load. Useful for user preferences, draft content, or UI state that should survive page refreshes.</p>
+  </section>
+
+  <!-- Server Triggers -->
+  <section id="server-triggers" class="mb-16">
+    <h2 class="text-2xl font-bold text-gray-100 mb-4">Server Triggers</h2>
+    <p class="text-gray-300 mb-4">Servers can fire client-side talkDOM messages by including the <code class="text-amber-400">X-TalkDOM-Trigger</code> response header:</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4"><code>X-TalkDOM-Trigger: notifications get: /api/alerts apply: inner</code></pre>
+    <p class="text-gray-300 mb-3">When talkDOM receives a response with this header, it executes the message as if a sender had been clicked.</p>
+
+    <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">CORS</h3>
+    <p class="text-gray-300 mb-3">For cross-origin requests, the server must expose the header:</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200"><code>Access-Control-Expose-Headers: X-TalkDOM-Trigger</code></pre>
+  </section>
+
+  <!-- Request Headers -->
+  <section id="request-headers" class="mb-16">
+    <h2 class="text-2xl font-bold text-gray-100 mb-4">Request Headers</h2>
+    <p class="text-gray-300 mb-4">Every talkDOM request includes these headers, letting the server distinguish partial requests from full page loads:</p>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm text-left border border-gray-700 rounded-lg overflow-hidden">
+        <thead class="bg-gray-900 text-gray-300">
+          <tr>
+            <th class="px-4 py-3 font-semibold">Header</th>
+            <th class="px-4 py-3 font-semibold">Description</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-800">
+          <tr class="bg-gray-950">
+            <td class="px-4 py-3 font-mono text-amber-400 whitespace-nowrap">X-TalkDOM-Request</td>
+            <td class="px-4 py-3 text-gray-300">Always present. Identifies the request as coming from talkDOM.</td>
+          </tr>
+          <tr class="bg-gray-950">
+            <td class="px-4 py-3 font-mono text-amber-400 whitespace-nowrap">X-TalkDOM-Current-URL</td>
+            <td class="px-4 py-3 text-gray-300">The current page URL at the time of the request.</td>
+          </tr>
+          <tr class="bg-gray-950">
+            <td class="px-4 py-3 font-mono text-amber-400 whitespace-nowrap">X-TalkDOM-Receiver</td>
+            <td class="px-4 py-3 text-gray-300">The name of the receiver that will handle the response.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">CSRF Protection</h3>
+    <p class="text-gray-300 mb-3">POST, PUT, and DELETE requests automatically include an <code class="text-amber-400">X-CSRF-Token</code> header, read from a meta tag:</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200"><code>&lt;meta name="csrf-token" content="your-token-here"&gt;</code></pre>
+  </section>
+
+  <!-- Lifecycle Events -->
+  <section id="lifecycle-events" class="mb-16">
+    <h2 class="text-2xl font-bold text-gray-100 mb-4">Lifecycle Events</h2>
+    <p class="text-gray-300 mb-4">talkDOM dispatches custom events on receiver elements after operations complete:</p>
+
+    <div class="space-y-4">
+      <div class="bg-gray-900 border border-gray-700 rounded-lg p-4">
+        <h4 class="font-mono text-amber-400 mb-2">talkdom:done</h4>
+        <p class="text-gray-300 text-sm mb-2">Fired after a successful operation. The <code>detail</code> object includes:</p>
+        <pre class="font-mono text-sm text-gray-200"><code>{ receiver, selector, args }</code></pre>
+      </div>
+      <div class="bg-gray-900 border border-gray-700 rounded-lg p-4">
+        <h4 class="font-mono text-amber-400 mb-2">talkdom:error</h4>
+        <p class="text-gray-300 text-sm mb-2">Fired when an operation fails. The <code>detail</code> object includes:</p>
+        <pre class="font-mono text-sm text-gray-200"><code>{ receiver, selector, args, error }</code></pre>
+      </div>
+    </div>
+
+    <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Example</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mt-3"><code>document.querySelector('[receiver="content"]')
+  .addEventListener('talkdom:done', (e) => {
+    console.log('Updated:', e.detail.receiver);
+  });</code></pre>
+  </section>
+
+  <!-- Programmatic API -->
+  <section id="programmatic-api" class="mb-16">
+    <h2 class="text-2xl font-bold text-gray-100 mb-4">Programmatic API</h2>
+
+    <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Sending messages from JavaScript</h3>
+    <p class="text-gray-300 mb-3">Use <code class="text-amber-400">talkDOM.send()</code> to dispatch messages programmatically. Returns a Promise:</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-6"><code>await talkDOM.send("content get: /api/data apply: inner");</code></pre>
+
+    <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Custom methods</h3>
+    <p class="text-gray-300 mb-3">Register custom keywords by adding functions to <code class="text-amber-400">talkDOM.methods</code>:</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200"><code>talkDOM.methods["highlight:"] = function(el, arg) {
+  el.style.backgroundColor = arg;
+};
+
+// Now usable in sender attributes:
+// sender="box highlight: yellow"</code></pre>
+  </section>
+
+</div>
