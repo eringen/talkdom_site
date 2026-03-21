@@ -11,7 +11,7 @@
     talkDOM.methods["toggle:"] = function(el, cls) { el.classList.toggle(cls); };
   </script>
 </head>
-<body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col">
+<body class="text-gray-100 min-h-screen flex flex-col">
 
   <!-- Navigation -->
   <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-950/90 backdrop-blur border-b border-gray-800">
@@ -169,7 +169,7 @@
       </div>
     </section>
 
-    <canvas id="glCanvas" style="position:absolute; z-index:-1"></canvas>
+    <canvas id="glCanvas" style="position:absolute; z-index:-1; top:0"></canvas>
     <script>
         // Matrix utilities
         const Mat4 = {
