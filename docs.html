@@ -56,40 +56,53 @@
     </div>
   </nav>
   <main id="content" receiver="content" class="pt-16">
-    <div class="max-w-3xl mx-auto px-6 py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+  <div class="flex gap-10">
+
+    <!-- Left sidebar: TOC -->
+    <nav class="hidden lg:block w-56 shrink-0">
+      <div class="sticky top-24">
+        <h2 class="text-xs font-semibold text-amber-400 uppercase tracking-wider mb-4">On this page</h2>
+        <ul class="space-y-2 text-sm border-l border-gray-800 pl-4">
+          <li><a href="#installation" class="text-gray-500 hover:text-gray-100 transition-colors">Installation</a></li>
+          <li><a href="#core-concepts" class="text-gray-500 hover:text-gray-100 transition-colors">Core Concepts</a></li>
+          <li><a href="#apply-operations" class="text-gray-500 hover:text-gray-100 transition-colors">Apply Operations</a></li>
+          <li><a href="#http-methods" class="text-gray-500 hover:text-gray-100 transition-colors">HTTP Methods</a></li>
+          <li><a href="#message-composition" class="text-gray-500 hover:text-gray-100 transition-colors">Message Composition</a></li>
+          <li><a href="#url-history" class="text-gray-500 hover:text-gray-100 transition-colors">URL History</a></li>
+          <li><a href="#polling" class="text-gray-500 hover:text-gray-100 transition-colors">Polling</a></li>
+          <li><a href="#persistence" class="text-gray-500 hover:text-gray-100 transition-colors">Persistence</a></li>
+          <li><a href="#server-triggers" class="text-gray-500 hover:text-gray-100 transition-colors">Server Triggers</a></li>
+          <li><a href="#request-headers" class="text-gray-500 hover:text-gray-100 transition-colors">Request Headers</a></li>
+          <li><a href="#lifecycle-events" class="text-gray-500 hover:text-gray-100 transition-colors">Lifecycle Events</a></li>
+          <li><a href="#programmatic-api" class="text-gray-500 hover:text-gray-100 transition-colors">Programmatic API</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Right: main content -->
+    <div class="min-w-0 flex-1 max-w-3xl">
 
       <h1 class="text-4xl font-bold text-gray-100 mb-2">Documentation</h1>
       <p class="text-gray-400 mb-12">Everything you need to know about talkDOM.</p>
 
-      <!-- Table of Contents -->
-      <nav class="mb-12 border border-gray-800 rounded-lg p-6 bg-gray-900/50">
-        <h2 class="text-sm font-semibold text-amber-400 uppercase tracking-wider mb-3">On this page</h2>
-        <ul class="space-y-1 text-sm">
-          <li><a href="#installation" class="text-gray-400 hover:text-gray-100">Installation</a></li>
-          <li><a href="#core-concepts" class="text-gray-400 hover:text-gray-100">Core Concepts</a></li>
-          <li><a href="#apply-operations" class="text-gray-400 hover:text-gray-100">Apply Operations</a></li>
-          <li><a href="#http-methods" class="text-gray-400 hover:text-gray-100">HTTP Methods</a></li>
-          <li><a href="#message-composition" class="text-gray-400 hover:text-gray-100">Message Composition</a></li>
-          <li><a href="#url-history" class="text-gray-400 hover:text-gray-100">URL History</a></li>
-          <li><a href="#polling" class="text-gray-400 hover:text-gray-100">Polling</a></li>
-          <li><a href="#persistence" class="text-gray-400 hover:text-gray-100">Persistence</a></li>
-          <li><a href="#server-triggers" class="text-gray-400 hover:text-gray-100">Server Triggers</a></li>
-          <li><a href="#request-headers" class="text-gray-400 hover:text-gray-100">Request Headers</a></li>
-          <li><a href="#lifecycle-events" class="text-gray-400 hover:text-gray-100">Lifecycle Events</a></li>
-          <li><a href="#programmatic-api" class="text-gray-400 hover:text-gray-100">Programmatic API</a></li>
-        </ul>
-      </nav>
-
       <!-- Installation -->
-      <section id="installation" class="mb-16">
+      <section id="installation" class="mb-16 scroll-mt-24">
         <h2 class="text-2xl font-bold text-gray-100 mb-4">Installation</h2>
-        <p class="text-gray-300 mb-4">Add a single script tag. No build tools, no dependencies, no configuration.</p>
-        <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200"><code>&lt;script src="talkdom.js"&gt;&lt;/script&gt;</code></pre>
-        <p class="text-gray-400 text-sm mt-3">That's it. talkDOM is ready to use.</p>
+        <p class="text-gray-300 mb-6">Choose whichever method fits your project.</p>
+
+        <h3 class="text-lg font-semibold text-gray-100 mb-2">CDN</h3>
+        <p class="text-gray-300 mb-3">Add a single script tag. No build tools, no configuration.</p>
+        <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200"><code>&lt;script src="https://cdn.jsdelivr.net/npm/talkdom/dist/talkdom.min.js"&gt;&lt;/script&gt;</code></pre>
+
+        <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">npm</h3>
+        <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200"><code>npm install talkdom</code></pre>
+
+        <p class="text-gray-400 text-sm mt-4">That's it. talkDOM is ready to use.</p>
       </section>
 
       <!-- Core Concepts -->
-      <section id="core-concepts" class="mb-16">
+      <section id="core-concepts" class="mb-16 scroll-mt-24">
         <h2 class="text-2xl font-bold text-gray-100 mb-4">Core Concepts</h2>
         <p class="text-gray-300 mb-4">talkDOM uses two HTML attributes to wire up interactions: <code class="text-amber-400">receiver</code> and <code class="text-amber-400">sender</code>.</p>
 
@@ -109,7 +122,7 @@
       </section>
 
       <!-- Apply Operations -->
-      <section id="apply-operations" class="mb-16">
+      <section id="apply-operations" class="mb-16 scroll-mt-24">
         <h2 class="text-2xl font-bold text-gray-100 mb-4">Apply Operations</h2>
         <p class="text-gray-300 mb-4">The <code class="text-amber-400">apply:</code> keyword determines how fetched content is inserted into the receiver. Four modes are available:</p>
 
@@ -149,7 +162,7 @@
       </section>
 
       <!-- HTTP Methods -->
-      <section id="http-methods" class="mb-16">
+      <section id="http-methods" class="mb-16 scroll-mt-24">
         <h2 class="text-2xl font-bold text-gray-100 mb-4">HTTP Methods</h2>
         <p class="text-gray-300 mb-4">talkDOM supports four HTTP keywords. Each takes a URL and returns the response text:</p>
 
@@ -171,7 +184,7 @@ delete: &rarr; DELETE request</code></pre>
       </section>
 
       <!-- Message Composition -->
-      <section id="message-composition" class="mb-16">
+      <section id="message-composition" class="mb-16 scroll-mt-24">
         <h2 class="text-2xl font-bold text-gray-100 mb-4">Message Composition</h2>
         <p class="text-gray-300 mb-4">Messages can be composed using pipes and semicolons for complex workflows.</p>
 
@@ -190,7 +203,7 @@ delete: &rarr; DELETE request</code></pre>
       </section>
 
       <!-- URL History -->
-      <section id="url-history" class="mb-16">
+      <section id="url-history" class="mb-16 scroll-mt-24">
         <h2 class="text-2xl font-bold text-gray-100 mb-4">URL History</h2>
         <p class="text-gray-300 mb-4">The <code class="text-amber-400">push-url</code> attribute on a sender updates the browser's URL via <code>history.pushState</code> when the message is dispatched:</p>
         <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4"><code>&lt;a href="/about"
@@ -203,7 +216,7 @@ delete: &rarr; DELETE request</code></pre>
       </section>
 
       <!-- Polling -->
-      <section id="polling" class="mb-16">
+      <section id="polling" class="mb-16 scroll-mt-24">
         <h2 class="text-2xl font-bold text-gray-100 mb-4">Polling</h2>
         <p class="text-gray-300 mb-4">Receivers can automatically refresh their content at a set interval using the <code class="text-amber-400">poll:</code> keyword in the receiver attribute:</p>
         <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4"><code>&lt;div receiver="status get: /api/status apply: inner poll: 5s"&gt;&lt;/div&gt;</code></pre>
@@ -212,7 +225,7 @@ delete: &rarr; DELETE request</code></pre>
       </section>
 
       <!-- Persistence -->
-      <section id="persistence" class="mb-16">
+      <section id="persistence" class="mb-16 scroll-mt-24">
         <h2 class="text-2xl font-bold text-gray-100 mb-4">Persistence</h2>
         <p class="text-gray-300 mb-4">Add the <code class="text-amber-400">persist</code> attribute to a receiver to save its content to <code>localStorage</code>:</p>
         <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4"><code>&lt;div receiver="preferences" persist&gt;&lt;/div&gt;</code></pre>
@@ -220,7 +233,7 @@ delete: &rarr; DELETE request</code></pre>
       </section>
 
       <!-- Server Triggers -->
-      <section id="server-triggers" class="mb-16">
+      <section id="server-triggers" class="mb-16 scroll-mt-24">
         <h2 class="text-2xl font-bold text-gray-100 mb-4">Server Triggers</h2>
         <p class="text-gray-300 mb-4">Servers can fire client-side talkDOM messages by including the <code class="text-amber-400">X-TalkDOM-Trigger</code> response header:</p>
         <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4"><code>X-TalkDOM-Trigger: notifications get: /api/alerts apply: inner</code></pre>
@@ -232,7 +245,7 @@ delete: &rarr; DELETE request</code></pre>
       </section>
 
       <!-- Request Headers -->
-      <section id="request-headers" class="mb-16">
+      <section id="request-headers" class="mb-16 scroll-mt-24">
         <h2 class="text-2xl font-bold text-gray-100 mb-4">Request Headers</h2>
         <p class="text-gray-300 mb-4">Every talkDOM request includes these headers, letting the server distinguish partial requests from full page loads:</p>
 
@@ -267,7 +280,7 @@ delete: &rarr; DELETE request</code></pre>
       </section>
 
       <!-- Lifecycle Events -->
-      <section id="lifecycle-events" class="mb-16">
+      <section id="lifecycle-events" class="mb-16 scroll-mt-24">
         <h2 class="text-2xl font-bold text-gray-100 mb-4">Lifecycle Events</h2>
         <p class="text-gray-300 mb-4">talkDOM dispatches custom events on receiver elements after operations complete:</p>
 
@@ -292,7 +305,7 @@ delete: &rarr; DELETE request</code></pre>
       </section>
 
       <!-- Programmatic API -->
-      <section id="programmatic-api" class="mb-16">
+      <section id="programmatic-api" class="mb-16 scroll-mt-24">
         <h2 class="text-2xl font-bold text-gray-100 mb-4">Programmatic API</h2>
 
         <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Sending messages from JavaScript</h3>
@@ -310,6 +323,8 @@ delete: &rarr; DELETE request</code></pre>
       </section>
 
     </div>
+  </div>
+</div>
   </main>
 </body>
 </html>
