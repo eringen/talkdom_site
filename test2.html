@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WebGL Neural Nodes</title>
+<style>
+body{
+margin:0;
+overflow:hidden;
+background:black;
+}
+canvas{
+display:block;
+width:100vw;
+height:100vh;
+}
+</style>
+</head>
+
+<body>
+<canvas id="gl"></canvas>
+
+<script>
+const canvas = document.getElementById("gl");
+const gl = canvas.getContext("webgl2");
+
+function resize(){
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+gl.viewport(0,0,canvas.width,canvas.height);
+}
+window.addEventListener("resize",resize);
+resize();
+
+const vertex = `#version 300 es
+precision highp float;
+
+in vec3 position;
+in float size;
+in vec3 color;
+
+uniform float time;
+uniform mat4 projection;
+uniform mat4 view;
+
+out vec3 vColor;
+
+void main(){
+
+vColor = color;
+
+vec4 world = view * vec4(position,1.0);
+
+float twinkle = sin(time + position.x*3.0) * 0.15 + 1.0;
+
+gl_PointSize = size * twinkle * (300.0 / -world.z);
+
+gl_Position = projection * world;
+}
+`;
+
+const fragment = `#version 300 es
+precision highp float;
+
+in vec3 vColor;
+out vec4 frag;
+
+void main(){
+
+vec2 c = gl_PointCoord*2.0-1.0;
+float d = length(c);
+
+if(d>1.0) discard;
+
+float glow = pow(1.0-d,3.0);
+
+vec3 col = vColor * glow * 3.5;
+
+frag = vec4(col, glow);
+}
+`;
+
+function compile(src,type){
+const s = gl.createShader(type);
+gl.shaderSource(s,src);
+gl.compileShader(s);
+if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))
+console.error(gl.getShaderInfoLog(s));
+return s;
+}
+
+const program = gl.createProgram();
+gl.attachShader(program,compile(vertex,gl.VERTEX_SHADER));
+gl.attachShader(program,compile(fragment,gl.FRAGMENT_SHADER));
+gl.linkProgram(program);
+gl.useProgram(program);
+
+const posLoc = gl.getAttribLocation(program,"position");
+const sizeLoc = gl.getAttribLocation(program,"size");
+const colorLoc = gl.getAttribLocation(program,"color");
+
+const projLoc = gl.getUniformLocation(program,"projection");
+const viewLoc = gl.getUniformLocation(program,"view");
+const timeLoc = gl.getUniformLocation(program,"time");
+
+const COUNT = 1200;
+
+const pos = new Float32Array(COUNT*3);
+const size = new Float32Array(COUNT);
+const color = new Float32Array(COUNT*3);
+
+for(let i=0;i<COUNT;i++){
+
+let r = Math.random()*15;
+let a = Math.random()*Math.PI*2;
+let b = Math.random()*Math.PI;
+
+pos[i*3+0] = Math.cos(a)*Math.sin(b)*r;
+pos[i*3+1] = Math.sin(a)*Math.sin(b)*r;
+pos[i*3+2] = Math.cos(b)*r;
+
+size[i] = 8 + Math.random()*10;
+
+color[i*3+0] = 0.4 + Math.random()*0.6;
+color[i*3+1] = 0.3 + Math.random()*0.5;
+color[i*3+2] = 0.7 + Math.random()*0.3;
+}
+
+function buffer(data,loc,n){
+let b = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER,b);
+gl.bufferData(gl.ARRAY_BUFFER,data,gl.STATIC_DRAW);
+gl.enableVertexAttribArray(loc);
+gl.vertexAttribPointer(loc,n,gl.FLOAT,false,0,0);
+}
+
+buffer(pos,posLoc,3);
+buffer(size,sizeLoc,1);
+buffer(color,colorLoc,3);
+
+function perspective(fov,aspect,near,far){
+
+let t = Math.tan(fov/2);
+
+return new Float32Array([
+1/(aspect*t),0,0,0,
+0,1/t,0,0,
+0,0,(far+near)/(near-far),-1,
+0,0,(2*far*near)/(near-far),0
+]);
+}
+
+function viewMatrix(z){
+
+return new Float32Array([
+1,0,0,0,
+0,1,0,0,
+0,0,1,0,
+0,0,z,1
+]);
+}
+
+const start = Date.now();
+
+function render(){
+
+let time = (Date.now()-start)/1000;
+
+gl.clearColor(0,0,0,1);
+gl.clear(gl.COLOR_BUFFER_BIT);
+
+gl.enable(gl.BLEND);
+gl.blendFunc(gl.SRC_ALPHA,gl.ONE);
+
+let proj = perspective(Math.PI/3,canvas.width/canvas.height,0.1,1000);
+let view = viewMatrix(-40);
+
+gl.uniformMatrix4fv(projLoc,false,proj);
+gl.uniformMatrix4fv(viewLoc,false,view);
+gl.uniform1f(timeLoc,time);
+
+gl.drawArrays(gl.POINTS,0,COUNT);
+
+requestAnimationFrame(render);
+}
+
+render();
+</script>
+
+</body>
+</html>

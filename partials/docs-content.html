@@ -18,6 +18,8 @@
           <li><a href="#request-headers" class="text-gray-500 hover:text-gray-100 transition-colors">Request Headers</a></li>
           <li><a href="#lifecycle-events" class="text-gray-500 hover:text-gray-100 transition-colors">Lifecycle Events</a></li>
           <li><a href="#programmatic-api" class="text-gray-500 hover:text-gray-100 transition-colors">Programmatic API</a></li>
+          <li><a href="#security" class="text-gray-500 hover:text-gray-100 transition-colors">Security</a></li>
+          <li><a href="#browser-support" class="text-gray-500 hover:text-gray-100 transition-colors">Browser Support</a></li>
         </ul>
       </div>
     </nav>
@@ -262,6 +264,48 @@ delete: &rarr; DELETE request</code></pre>
 
 // Now usable in sender attributes:
 // sender="box highlight: yellow"</code></pre>
+      </section>
+
+      <!-- Security -->
+      <section id="security" class="mb-16 scroll-mt-24">
+        <h2 class="text-2xl font-bold text-gray-100 mb-4">Security</h2>
+        <p class="text-gray-300 mb-4">talkDOM does <strong>not</strong> sanitize HTML. You must ensure that server responses are safe before inserting them into the DOM.</p>
+        <p class="text-gray-300 mb-4">CSRF tokens are automatically read from a <code class="text-amber-400">&lt;meta name="csrf-token"&gt;</code> tag and sent with POST, PUT, and DELETE requests.</p>
+        <p class="text-gray-300">Avoid storing sensitive data in receivers that use the <code class="text-amber-400">persist</code> attribute, as content is saved to <code>localStorage</code>.</p>
+      </section>
+
+      <!-- Browser Support -->
+      <section id="browser-support" class="mb-16 scroll-mt-24">
+        <h2 class="text-2xl font-bold text-gray-100 mb-4">Browser Support</h2>
+        <p class="text-gray-300 mb-4">talkDOM targets modern browsers. Internet Explorer is not supported.</p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-left border border-gray-700 rounded-lg overflow-hidden">
+            <thead class="bg-gray-900 text-gray-300">
+              <tr>
+                <th class="px-4 py-3 font-semibold">Browser</th>
+                <th class="px-4 py-3 font-semibold">Minimum Version</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-800">
+              <tr class="bg-gray-950">
+                <td class="px-4 py-3 text-gray-300">Chrome</td>
+                <td class="px-4 py-3 text-gray-300">51+</td>
+              </tr>
+              <tr class="bg-gray-950">
+                <td class="px-4 py-3 text-gray-300">Firefox</td>
+                <td class="px-4 py-3 text-gray-300">49+</td>
+              </tr>
+              <tr class="bg-gray-950">
+                <td class="px-4 py-3 text-gray-300">Safari</td>
+                <td class="px-4 py-3 text-gray-300">10+</td>
+              </tr>
+              <tr class="bg-gray-950">
+                <td class="px-4 py-3 text-gray-300">Edge</td>
+                <td class="px-4 py-3 text-gray-300">79+</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
     </div>
