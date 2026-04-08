@@ -16,8 +16,12 @@
           <li><a href="#persistence" class="text-gray-500 hover:text-gray-100 transition-colors">Persistence</a></li>
           <li><a href="#server-triggers" class="text-gray-500 hover:text-gray-100 transition-colors">Server Triggers</a></li>
           <li><a href="#request-headers" class="text-gray-500 hover:text-gray-100 transition-colors">Request Headers</a></li>
+          <li><a href="#form-body" class="text-gray-500 hover:text-gray-100 transition-colors">Form Body</a></li>
+          <li><a href="#json-body" class="text-gray-500 hover:text-gray-100 transition-colors">JSON Body</a></li>
+          <li><a href="#loading-state" class="text-gray-500 hover:text-gray-100 transition-colors">Loading State</a></li>
           <li><a href="#lifecycle-events" class="text-gray-500 hover:text-gray-100 transition-colors">Lifecycle Events</a></li>
           <li><a href="#programmatic-api" class="text-gray-500 hover:text-gray-100 transition-colors">Programmatic API</a></li>
+          <li><a href="#websocket" class="text-gray-500 hover:text-gray-100 transition-colors">WebSocket Plugin</a></li>
           <li><a href="#security" class="text-gray-500 hover:text-gray-100 transition-colors">Security</a></li>
           <li><a href="#browser-support" class="text-gray-500 hover:text-gray-100 transition-colors">Browser Support</a></li>
         </ul>
@@ -41,6 +45,9 @@
 
         <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">npm</h3>
         <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200"><code>npm install talkdom</code></pre>
+
+        <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">ES Module</h3>
+        <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200"><code>import { talkDOM } from "talkdom";</code></pre>
 
         <p class="text-gray-400 text-sm mt-4">That's it. talkDOM is ready to use.</p>
       </section>
@@ -165,7 +172,11 @@ delete: &rarr; DELETE request</code></pre>
         <p class="text-gray-300 mb-4">Receivers can automatically refresh their content at a set interval using the <code class="text-amber-400">poll:</code> keyword in the receiver attribute:</p>
         <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4"><code>&lt;div receiver="status get: /api/status apply: inner poll: 5s"&gt;&lt;/div&gt;</code></pre>
         <p class="text-gray-300 mb-3">This fetches <code>/api/status</code> every 5 seconds and replaces the element's inner HTML with the response.</p>
-        <p class="text-gray-400 text-sm">Polling stops automatically when the element is removed from the DOM.</p>
+        <p class="text-gray-300 mb-3">Polling stops automatically when the element is removed from the DOM. Elements added dynamically (e.g., via fragment injection) are picked up automatically by a <code class="text-amber-400">MutationObserver</code> &mdash; no manual setup needed.</p>
+
+        <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Poller limit</h3>
+        <p class="text-gray-300 mb-3">A maximum of 64 concurrent pollers is enforced by default. Adjust via:</p>
+        <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200"><code>talkDOM.maxPollers = 128;</code></pre>
       </section>
 
       <!-- Persistence -->
@@ -223,6 +234,51 @@ delete: &rarr; DELETE request</code></pre>
         <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200"><code>&lt;meta name="csrf-token" content="your-token-here"&gt;</code></pre>
       </section>
 
+      <!-- Form Body -->
+      <section id="form-body" class="mb-16 scroll-mt-24">
+        <h2 class="text-2xl font-bold text-gray-100 mb-4">Form Body</h2>
+        <p class="text-gray-300 mb-4"><code class="text-amber-400">post-form:</code>, <code class="text-amber-400">put-form:</code>, and <code class="text-amber-400">delete-form:</code> serialize a form's inputs as <code>application/x-www-form-urlencoded</code> and send them with the request. The <code class="text-amber-400">form:</code> keyword specifies the CSS selector for the form element.</p>
+        <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4"><code>&lt;form id="my-form"&gt;
+  &lt;input name="name" value="test"&gt;
+  &lt;input name="email" value="user@example.com"&gt;
+&lt;/form&gt;
+
+&lt;div receiver="result"&gt;&lt;/div&gt;
+
+&lt;button sender="result post-form: /api/submit apply: inner form: #my-form"&gt;
+  Submit
+&lt;/button&gt;</code></pre>
+        <p class="text-gray-400 text-sm">Uses <code>URLSearchParams</code> and <code>FormData</code> internally for serialization.</p>
+      </section>
+
+      <!-- JSON Body -->
+      <section id="json-body" class="mb-16 scroll-mt-24">
+        <h2 class="text-2xl font-bold text-gray-100 mb-4">JSON Body</h2>
+        <p class="text-gray-300 mb-4"><code class="text-amber-400">post-json:</code> and <code class="text-amber-400">put-json:</code> send a JSON payload with the request. The <code class="text-amber-400">json:</code> keyword specifies the JSON string (parsed at runtime).</p>
+        <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4"><code>&lt;div receiver="result"&gt;&lt;/div&gt;
+
+&lt;button sender="result post-json: /api/data apply: inner json: {&amp;quot;name&amp;quot;:&amp;quot;test&amp;quot;}"&gt;
+  Send JSON
+&lt;/button&gt;</code></pre>
+        <p class="text-gray-400 text-sm">HTML entities are used to encode quotes in the attribute value.</p>
+      </section>
+
+      <!-- Loading State -->
+      <section id="loading-state" class="mb-16 scroll-mt-24">
+        <h2 class="text-2xl font-bold text-gray-100 mb-4">Loading State</h2>
+        <p class="text-gray-300 mb-4">The <code class="text-amber-400">loading:</code> keyword toggles a CSS class on the receiver while an async operation is in progress. The class is removed on both success and error.</p>
+        <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4"><code>&lt;style&gt;
+  .is-loading { opacity: 0.5; pointer-events: none; }
+&lt;/style&gt;
+
+&lt;div receiver="content"&gt;&lt;/div&gt;
+
+&lt;button sender="content get: /api/data apply: inner loading: is-loading"&gt;
+  Load
+&lt;/button&gt;</code></pre>
+        <p class="text-gray-400 text-sm">Works with any HTTP method. The class is added before the request and removed when it completes.</p>
+      </section>
+
       <!-- Lifecycle Events -->
       <section id="lifecycle-events" class="mb-16 scroll-mt-24">
         <h2 class="text-2xl font-bold text-gray-100 mb-4">Lifecycle Events</h2>
@@ -264,6 +320,89 @@ delete: &rarr; DELETE request</code></pre>
 
 // Now usable in sender attributes:
 // sender="box highlight: yellow"</code></pre>
+      </section>
+
+      <!-- WebSocket Plugin -->
+      <section id="websocket" class="mb-16 scroll-mt-24">
+        <h2 class="text-2xl font-bold text-gray-100 mb-4">WebSocket Plugin</h2>
+        <p class="text-gray-300 mb-4">The optional WebSocket plugin adds server-push via WebSocket as an alternative to polling. Load it after the core library:</p>
+        <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-6"><code>&lt;script src="https://cdn.jsdelivr.net/npm/talkdom/dist/talkdom.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/talkdom/dist/talkdom-ws.min.js"&gt;&lt;/script&gt;</code></pre>
+
+        <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Receiving</h3>
+        <p class="text-gray-300 mb-3">Add <code class="text-amber-400">ws:</code> as the last keyword on a receiver with a WebSocket URL as its argument:</p>
+        <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4"><code>&lt;div receiver="feed ws: ws://localhost:3000/updates"&gt;&lt;/div&gt;</code></pre>
+        <p class="text-gray-300 mb-3">The server sends JSON messages to control what gets applied:</p>
+        <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4"><code>{"receiver": "feed", "content": "&lt;p&gt;New post&lt;/p&gt;", "op": "append"}</code></pre>
+
+        <div class="overflow-x-auto mb-4">
+          <table class="w-full text-sm text-left border border-gray-700 rounded-lg overflow-hidden">
+            <thead class="bg-gray-900 text-gray-300">
+              <tr>
+                <th class="px-4 py-3 font-semibold">Field</th>
+                <th class="px-4 py-3 font-semibold">Required</th>
+                <th class="px-4 py-3 font-semibold">Description</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-800">
+              <tr class="bg-gray-950">
+                <td class="px-4 py-3 font-mono text-amber-400">receiver</td>
+                <td class="px-4 py-3 text-gray-300">yes</td>
+                <td class="px-4 py-3 text-gray-300">Target receiver name</td>
+              </tr>
+              <tr class="bg-gray-950">
+                <td class="px-4 py-3 font-mono text-amber-400">content</td>
+                <td class="px-4 py-3 text-gray-300">no</td>
+                <td class="px-4 py-3 text-gray-300">HTML or text content</td>
+              </tr>
+              <tr class="bg-gray-950">
+                <td class="px-4 py-3 font-mono text-amber-400">op</td>
+                <td class="px-4 py-3 text-gray-300">no</td>
+                <td class="px-4 py-3 text-gray-300"><code>inner</code> (default), <code>text</code>, <code>append</code>, <code>outer</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="text-gray-300 mb-3">The server can also send raw talkDOM message syntax instead of JSON:</p>
+        <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-6"><code>feed apply: Updated! text</code></pre>
+
+        <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Sending</h3>
+        <p class="text-gray-300 mb-3">The plugin registers a <code class="text-amber-400">ws:send:</code> method. The receiver element's value (for inputs) or text content is sent over the WebSocket connection:</p>
+        <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-6"><code>&lt;input receiver="chatbox" type="text"&gt;
+&lt;button sender="chatbox ws:send: ws://localhost:3000/chat"&gt;Send&lt;/button&gt;</code></pre>
+
+        <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Shared connections</h3>
+        <p class="text-gray-300 mb-3">Multiple receivers pointing to the same URL share a single WebSocket connection:</p>
+        <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-6"><code>&lt;div receiver="messages ws: ws://localhost:3000/live"&gt;&lt;/div&gt;
+&lt;div receiver="presence ws: ws://localhost:3000/live"&gt;&lt;/div&gt;</code></pre>
+
+        <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Reconnection</h3>
+        <p class="text-gray-300 mb-3">Connections automatically reconnect with exponential backoff (1s initial, 30s max, &plusmn;25% jitter). Reconnection stops when all receivers for a URL are removed from the DOM.</p>
+
+        <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">WebSocket events</h3>
+        <div class="space-y-4 mb-6">
+          <div class="bg-gray-900 border border-gray-700 rounded-lg p-4">
+            <h4 class="font-mono text-amber-400 mb-2">talkdom:ws:open</h4>
+            <p class="text-gray-300 text-sm">Fired when a WebSocket connection opens. Detail: <code>{ url }</code></p>
+          </div>
+          <div class="bg-gray-900 border border-gray-700 rounded-lg p-4">
+            <h4 class="font-mono text-amber-400 mb-2">talkdom:ws:close</h4>
+            <p class="text-gray-300 text-sm">Fired when a connection closes. Detail: <code>{ url, code, reason }</code></p>
+          </div>
+          <div class="bg-gray-900 border border-gray-700 rounded-lg p-4">
+            <h4 class="font-mono text-amber-400 mb-2">talkdom:ws:error</h4>
+            <p class="text-gray-300 text-sm">Fired on connection error. Detail: <code>{ url }</code></p>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Programmatic WebSocket API</h3>
+        <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200"><code>talkDOM.ws.connect("ws://localhost:3000/live");
+talkDOM.ws.send("ws://localhost:3000/live", { action: "subscribe" });
+talkDOM.ws.disconnect("ws://localhost:3000/live");
+
+talkDOM.ws.connections;      // { "ws://...": { state, receivers } }
+talkDOM.ws.maxConnections;   // default 16</code></pre>
       </section>
 
       <!-- Security -->

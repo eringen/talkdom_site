@@ -1,0 +1,40 @@
+<div class="p-6 space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold font-mono text-gray-100">post-form:apply:form:</h2>
+    <span class="inline-block mt-1 px-2 py-0.5 text-xs uppercase tracking-widest font-semibold text-amber-400 bg-amber-400/10 rounded">Form Method</span>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Description</h3>
+    <p class="text-gray-300 leading-relaxed">Serializes a form's inputs as <code class="font-mono text-amber-400/80">application/x-www-form-urlencoded</code> and sends them with a POST request. The response is applied to the receiver.</p>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Syntax</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200">receiver post-form: &lt;url&gt; apply: &lt;op&gt; form: &lt;selector&gt;</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Example</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;form id="my-form"&gt;
+  &lt;input name="name" value="test"&gt;
+  &lt;input name="email" value="user@example.com"&gt;
+&lt;/form&gt;
+
+&lt;div receiver="result"&gt;&lt;/div&gt;
+
+&lt;button sender="result post-form: /api/submit apply: inner form: #my-form"&gt;
+  Submit
+&lt;/button&gt;</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Notes</h3>
+    <ul class="list-disc list-inside text-sm text-gray-400 space-y-1">
+      <li>Uses <code class="font-mono text-amber-400/80">URLSearchParams</code> and <code class="font-mono text-amber-400/80">FormData</code> for serialization</li>
+      <li>The <code class="font-mono text-amber-400/80">form:</code> argument is a CSS selector (e.g. <code class="font-mono text-amber-400/80">#my-form</code>)</li>
+      <li>CSRF token is sent automatically for POST requests</li>
+      <li>See also: <code class="font-mono text-amber-400/80">put-form:apply:form:</code>, <code class="font-mono text-amber-400/80">delete-form:apply:form:</code></li>
+    </ul>
+  </div>
+</div>

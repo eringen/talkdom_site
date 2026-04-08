@@ -1,0 +1,49 @@
+<div class="p-6 space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold font-mono text-gray-100">WebSocket Events</h2>
+    <span class="inline-block mt-1 px-2 py-0.5 text-xs uppercase tracking-widest font-semibold text-amber-400 bg-amber-400/10 rounded">WebSocket</span>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Description</h3>
+    <p class="text-gray-300 leading-relaxed">WebSocket lifecycle events fire on all receiver elements subscribed to a URL and bubble up the DOM. Incoming messages also fire the standard <code class="font-mono text-amber-400/80">talkdom:done</code> event.</p>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Events</h3>
+    <div class="space-y-3">
+      <div class="bg-gray-900 border border-gray-700 rounded-lg p-3">
+        <code class="font-mono text-amber-400">talkdom:ws:open</code>
+        <p class="text-gray-400 text-sm mt-1">Connection opened. Detail: <code class="font-mono text-amber-400/80">{ url }</code></p>
+      </div>
+      <div class="bg-gray-900 border border-gray-700 rounded-lg p-3">
+        <code class="font-mono text-amber-400">talkdom:ws:close</code>
+        <p class="text-gray-400 text-sm mt-1">Connection closed. Detail: <code class="font-mono text-amber-400/80">{ url, code, reason }</code></p>
+      </div>
+      <div class="bg-gray-900 border border-gray-700 rounded-lg p-3">
+        <code class="font-mono text-amber-400">talkdom:ws:error</code>
+        <p class="text-gray-400 text-sm mt-1">Connection error. Detail: <code class="font-mono text-amber-400/80">{ url }</code></p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Example</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">document.addEventListener("talkdom:ws:open", function (e) {
+  console.log("connected to", e.detail.url);
+});
+
+document.addEventListener("talkdom:ws:close", function (e) {
+  console.log("disconnected from", e.detail.url, e.detail.code);
+});</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Notes</h3>
+    <ul class="list-disc list-inside text-sm text-gray-400 space-y-1">
+      <li>Events bubble, so you can listen at <code class="font-mono text-amber-400/80">document</code> level</li>
+      <li>Fired on all receivers subscribed to the URL, not just the first</li>
+      <li>The standard <code class="font-mono text-amber-400/80">talkdom:done</code> event also fires after content is applied from a WebSocket message</li>
+    </ul>
+  </div>
+</div>

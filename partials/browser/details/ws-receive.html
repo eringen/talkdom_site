@@ -1,0 +1,45 @@
+<div class="p-6 space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold font-mono text-gray-100">ws:</h2>
+    <span class="inline-block mt-1 px-2 py-0.5 text-xs uppercase tracking-widest font-semibold text-amber-400 bg-amber-400/10 rounded">WebSocket</span>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Description</h3>
+    <p class="text-gray-300 leading-relaxed">Declares a WebSocket connection on a receiver element. The server pushes content to the receiver in real time. Requires the <code class="font-mono text-amber-400/80">talkdom-ws.min.js</code> plugin.</p>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Syntax</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200">&lt;div receiver="name ws: &lt;ws-url&gt;"&gt;&lt;/div&gt;</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Server Message Formats</h3>
+    <p class="text-gray-300 text-sm mb-3">JSON with receiver routing:</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4">{"receiver": "feed", "content": "&lt;p&gt;New&lt;/p&gt;", "op": "append"}</pre>
+    <p class="text-gray-300 text-sm mb-3">Raw talkDOM message syntax:</p>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200">feed apply: Updated! text</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Example</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;!-- Real-time feed --&gt;
+&lt;div receiver="feed ws: ws://localhost:3000/updates"&gt;&lt;/div&gt;
+
+&lt;!-- Multiple receivers sharing one connection --&gt;
+&lt;div receiver="messages ws: ws://localhost:3000/live"&gt;&lt;/div&gt;
+&lt;div receiver="presence ws: ws://localhost:3000/live"&gt;&lt;/div&gt;</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Notes</h3>
+    <ul class="list-disc list-inside text-sm text-gray-400 space-y-1">
+      <li>Multiple receivers on the same URL share a single WebSocket connection</li>
+      <li>Auto-reconnects with exponential backoff (1s&ndash;30s, &plusmn;25% jitter)</li>
+      <li>Reconnection stops when all receivers for a URL are removed from the DOM</li>
+      <li>Dynamically added receivers are detected via <code class="font-mono text-amber-400/80">MutationObserver</code></li>
+      <li>Default max 16 connections (configurable via <code class="font-mono text-amber-400/80">talkDOM.ws.maxConnections</code>)</li>
+    </ul>
+  </div>
+</div>

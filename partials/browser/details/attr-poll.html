@@ -37,6 +37,8 @@
       <li><code class="font-mono text-amber-400/80">poll:</code> must be the last keyword in the receiver attribute</li>
       <li>Uses <code class="font-mono text-amber-400/80">setInterval</code> &mdash; cleared when the element is disconnected</li>
       <li>The method and args before <code class="font-mono text-amber-400/80">poll:</code> are executed on each tick</li>
+      <li>Dynamically added elements with <code class="font-mono text-amber-400/80">poll:</code> are detected via <code class="font-mono text-amber-400/80">MutationObserver</code></li>
+      <li>Default limit of 64 concurrent pollers (configurable via <code class="font-mono text-amber-400/80">talkDOM.maxPollers</code>)</li>
     </ul>
   </div>
 </div>

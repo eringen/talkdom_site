@@ -1,0 +1,37 @@
+<div class="p-6 space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold font-mono text-gray-100">put-form:apply:form:</h2>
+    <span class="inline-block mt-1 px-2 py-0.5 text-xs uppercase tracking-widest font-semibold text-amber-400 bg-amber-400/10 rounded">Form Method</span>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Description</h3>
+    <p class="text-gray-300 leading-relaxed">Serializes a form's inputs as <code class="font-mono text-amber-400/80">application/x-www-form-urlencoded</code> and sends them with a PUT request. The response is applied to the receiver.</p>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Syntax</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200">receiver put-form: &lt;url&gt; apply: &lt;op&gt; form: &lt;selector&gt;</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Example</h3>
+    <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;form id="edit-form"&gt;
+  &lt;input name="title" value="Updated title"&gt;
+&lt;/form&gt;
+
+&lt;div receiver="result"&gt;&lt;/div&gt;
+
+&lt;button sender="result put-form: /api/posts/1 apply: inner form: #edit-form"&gt;
+  Update
+&lt;/button&gt;</pre>
+  </div>
+
+  <div>
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Notes</h3>
+    <ul class="list-disc list-inside text-sm text-gray-400 space-y-1">
+      <li>Identical to <code class="font-mono text-amber-400/80">post-form:</code> but uses the PUT method</li>
+      <li>CSRF token is sent automatically</li>
+    </ul>
+  </div>
+</div>
