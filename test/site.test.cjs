@@ -28,6 +28,22 @@ function setup(t, page='browser.html') {
  return {w,calls,button,title,active,hold,failures};
 }
 
+test('landing WebGL canvas survives content navigation',async t=>{
+ const e=setup(t,'index.html');
+ const canvas=e.w.document.querySelector('#glCanvas');
+ assert.ok(canvas);
+ assert.equal(canvas.closest('main#content'),null);
+ assert.match(read('index.html'),/<script src="\/animation\.js" defer><\/script>/);
+ assert.match(read('css/input.css'),/body\s*\{\s*isolation:\s*isolate;/);
+ assert.match(read('css/input.css'),/#glCanvas\s*\{[^}]*z-index:\s*-1/s);
+ e.w.document.querySelector('a[href="/docs.html"]').click();
+ await waitFor(()=>e.w.document.querySelector('#content')?.textContent.includes('Documentation'));
+ assert.equal(e.w.document.querySelector('#glCanvas'),canvas);
+ e.w.document.querySelector('a[href="/examples.html"]').click();
+ await waitFor(()=>e.w.document.querySelector('#content')?.textContent.includes('Examples'));
+ assert.equal(e.w.document.querySelector('#glCanvas'),canvas);
+});
+
 test('standalone initializes once and highlights exactly the displayed entry',async t=>{
  const e=setup(t);await waitFor(()=>e.title()==='get:');
  assert.deepEqual(e.active('[data-category]'),['HTTP Methods']);assert.deepEqual(e.active('[data-item]'),['get:']);

@@ -10,3 +10,17 @@
     @apply text-sm;
   }
 }
+
+/* Keep the WebGL background behind page content and across navigation. */
+body {
+  isolation: isolate;
+}
+
+#glCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
