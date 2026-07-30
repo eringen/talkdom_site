@@ -32,6 +32,8 @@ test('landing WebGL canvas survives content navigation',async t=>{
  const e=setup(t,'index.html');
  const canvas=e.w.document.querySelector('#glCanvas');
  assert.ok(canvas);
+ assert.equal(canvas.style.position,'fixed');
+ assert.equal(canvas.style.zIndex,'-1');
  assert.equal(canvas.closest('main#content'),null);
  assert.match(read('index.html'),/<script src="\/animation\.js" defer><\/script>/);
  assert.match(read('css/input.css'),/body\s*\{\s*isolation:\s*isolate;/);
