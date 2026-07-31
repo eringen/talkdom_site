@@ -286,6 +286,113 @@ talkDOM.methods["toggle:"] = function(el, cls) {
       </details>
     </div>
   </div>
+  <!-- Example 9: Text-only output -->
+  <div class="border border-gray-800 rounded-lg overflow-hidden">
+    <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
+      <h2 class="text-sm font-semibold text-gray-200">Safe Text Output</h2>
+    </div>
+    <div class="p-5 space-y-4">
+      <p class="text-sm text-gray-400">Use <code class="font-mono text-amber-400/80 text-xs">text:</code> to write a literal value. The receiver only accepts text updates.</p>
+      <div receiver="demo9" accepts="text" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px] text-sm text-gray-300">
+        Click a button to update this message.
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <button sender="demo9 text: Updated as plain text with talkDOM." class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">Show first message</button>
+        <button sender="demo9 text: A second message replaces the first one." class="px-4 py-2 border border-gray-700 text-gray-200 rounded text-sm font-semibold hover:bg-gray-800 transition-colors">Show another</button>
+      </div>
+      <details class="mt-3">
+        <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
+        <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="notice" accepts="text"&gt;Ready&lt;/div&gt;
+
+&lt;button sender="notice text: Saved successfully"&gt;Save&lt;/button&gt;</pre>
+      </details>
+    </div>
+  </div>
+
+  <!-- Example 10: Persistence -->
+  <div class="border border-gray-800 rounded-lg overflow-hidden">
+    <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
+      <h2 class="text-sm font-semibold text-gray-200">Persist a Small Preference</h2>
+    </div>
+    <div class="p-5 space-y-4">
+      <p class="text-sm text-gray-400">The <code class="font-mono text-amber-400/80 text-xs">persist</code> attribute saves successful updates in same-origin local storage. Choose a value, then refresh this page.</p>
+      <div receiver="demo10" accepts="text" persist class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px] text-sm text-gray-300">
+        No preference selected yet.
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <button sender="demo10 text: Preference saved as dark" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">Choose dark</button>
+        <button sender="demo10 text: Preference saved as light" class="px-4 py-2 border border-gray-700 text-gray-200 rounded text-sm font-semibold hover:bg-gray-800 transition-colors">Choose light</button>
+      </div>
+      <details class="mt-3">
+        <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
+        <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="preference" accepts="text" persist&gt;Choose a theme&lt;/div&gt;
+&lt;button sender="preference text: Preference saved as dark"&gt;Dark&lt;/button&gt;</pre>
+      </details>
+    </div>
+  </div>
+
+  <!-- Example 11: Outer replacement -->
+  <div class="border border-gray-800 rounded-lg overflow-hidden">
+    <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
+      <h2 class="text-sm font-semibold text-gray-200">Replace the Receiver Element</h2>
+    </div>
+    <div class="p-5 space-y-4">
+      <p class="text-sm text-gray-400">Unlike <code class="font-mono text-amber-400/80 text-xs">inner</code>, <code class="font-mono text-amber-400/80 text-xs">outer</code> replaces the receiver itself. The response keeps the same receiver name so it can be targeted again.</p>
+      <div receiver="demo11" accepts="outer" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px] text-sm text-gray-300">
+        Original receiver element. Load the replacement to swap this whole box.
+      </div>
+      <button sender="demo11 get: /partials/demos/replacement-card.html apply: outer" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
+        Load Replacement
+      </button>
+      <details class="mt-3">
+        <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
+        <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="card" accepts="outer"&gt;Original card&lt;/div&gt;
+&lt;button sender="card get: /card.html apply: outer"&gt;Replace&lt;/button&gt;
+
+&lt;!-- /card.html must return a replacement with receiver="card" --&gt;
+&lt;div receiver="card" accepts="outer"&gt;New card&lt;/div&gt;</pre>
+      </details>
+    </div>
+  </div>
+
+  <!-- Tips -->
+  <section class="border border-amber-400/20 bg-amber-400/5 rounded-lg p-6 space-y-5">
+    <div>
+      <h2 class="text-xl font-semibold text-gray-100">Tips &amp; Tricks</h2>
+      <p class="text-sm text-gray-400 mt-1">A few habits that make message-driven pages easier to maintain.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-5 text-sm">
+      <div>
+        <h3 class="font-semibold text-gray-200 mb-1">Choose the apply operation deliberately</h3>
+        <p class="text-gray-400"><code class="text-amber-400">inner</code> replaces a receiver’s contents, <code class="text-amber-400">append</code> adds to a list, <code class="text-amber-400">text</code> writes literal text, and <code class="text-amber-400">outer</code> swaps the receiver element.</p>
+      </div>
+      <div>
+        <h3 class="font-semibold text-gray-200 mb-1">Use unique receiver names</h3>
+        <p class="text-gray-400">A message updates every element with that receiver name. Reuse a name when you want coordinated updates; otherwise give each target its own name.</p>
+      </div>
+      <div>
+        <h3 class="font-semibold text-gray-200 mb-1">Use pipes for dependencies</h3>
+        <p class="text-gray-400">A pipe passes one result to the next step. Separate independent work with a semicolon so both chains can start together.</p>
+      </div>
+      <div>
+        <h3 class="font-semibold text-gray-200 mb-1">Persist only non-sensitive UI state</h3>
+        <p class="text-gray-400">Persisted markup is stored as plain text in same-origin local storage. Never put tokens, passwords, or private data there.</p>
+      </div>
+      <div>
+        <h3 class="font-semibold text-gray-200 mb-1">Delegate events for changing content</h3>
+        <p class="text-gray-400">Listen on a stable ancestor such as <code class="text-amber-400">document</code> when controls may be replaced. talkDOM also bubbles <code class="text-amber-400">talkdom:done</code> and <code class="text-amber-400">talkdom:error</code> events.</p>
+      </div>
+      <div>
+        <h3 class="font-semibold text-gray-200 mb-1">Keep form bodies explicit</h3>
+        <p class="text-gray-400">Core <code class="text-amber-400">post:</code> sends a request without serializing a form. Register a custom method for validated form or JSON payloads.</p>
+      </div>
+    </div>
+    <div>
+      <p class="text-xs text-gray-400 mb-2">For arbitrary values, pass arguments directly instead of building a message string:</p>
+      <pre class="bg-gray-950/70 border border-gray-800 rounded-lg p-4 font-mono text-xs text-gray-200 overflow-x-auto">const notice = document.querySelector('[receiver="notice"]');
+await talkDOM.deliver(notice, "text:", [userProvidedValue]);</pre>
+    </div>
+  </section>
 </div>
 </main>
 

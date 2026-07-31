@@ -116,6 +116,19 @@ test('every category and item resolves to a matching reference with one highligh
  }
 });
 
+test('new examples cover text safety, persistence, and outer swaps',async t=>{
+ const e=setup(t,'examples.html');
+ e.button('button','Show first message').click();
+ assert.equal(e.w.document.querySelector('[receiver="demo9"]').textContent.trim(),'Updated as plain text with talkDOM.');
+ e.button('button','Choose dark').click();
+ const saved=JSON.parse(e.w.localStorage.getItem('talkDOM:demo10'));
+ assert.equal(saved.content,'Preference saved as dark');
+ e.button('button','Load Replacement').click();
+ await waitFor(()=>e.w.document.querySelector('[receiver="demo11"]')?.textContent.includes('Replacement loaded.'));
+ assert.equal(e.w.document.querySelector('[receiver="demo11"]').getAttribute('accepts'),'outer');
+ assert.ok(e.w.document.querySelector('button[sender^="demo11 "]'));
+});
+
 test('standalone docs, examples and browser bodies match their fragments',()=>{
  for(const page of ['browser','docs','examples']) {
   const full=new JSDOM(read(page+'.html'));const fragment=read('partials/'+page+'-content.html');
