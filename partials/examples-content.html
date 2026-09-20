@@ -125,11 +125,6 @@
       <button sender="demo5 toggle: bg-amber-400/20" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
         Toggle Background
       </button>
-      <script>
-        talkDOM.methods["toggle:"] = function(el, cls) {
-          el.classList.toggle(cls);
-        };
-      </script>
       <details class="mt-3">
         <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
         <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;script&gt;
@@ -155,7 +150,7 @@ talkDOM.methods["toggle:"] = function(el, cls) {
       <h2 class="text-sm font-semibold text-gray-200">Loading State</h2>
     </div>
     <div class="p-5 space-y-4">
-      <p class="text-sm text-gray-400">Use <code class="font-mono text-amber-400/80 text-xs">loading:</code> to toggle a CSS class on the receiver during async operations.</p>
+      <p class="text-sm text-gray-400">This site registers a custom <code class="font-mono text-amber-400/80 text-xs">get:apply:loading:</code> method to toggle a CSS class on the receiver during async operations.</p>
       <style>.demo-loading { opacity: 0.5; transition: opacity 0.2s; }</style>
       <div receiver="demo6a" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px] transition-opacity">
         <span class="text-sm text-gray-300">This box dims while loading.</span>
@@ -165,7 +160,13 @@ talkDOM.methods["toggle:"] = function(el, cls) {
       </button>
       <details class="mt-3">
         <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
-        <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;style&gt;.is-loading { opacity: 0.5; }&lt;/style&gt;
+        <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">talkDOM.methods[&quot;get:apply:loading:&quot;] = function(el, url, op, cls) {
+  el.classList.add(cls);
+  return talkDOM.methods[&quot;get:apply:&quot;](el, url, op)
+    .finally(function() { el.classList.remove(cls); });
+};
+
+&lt;style&gt;.is-loading { opacity: 0.5; }&lt;/style&gt;
 
 &lt;div receiver="demo6a"&gt;This box dims while loading.&lt;/div&gt;
 

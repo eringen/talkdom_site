@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./*.html", "./partials/**/*.html"],
+  content: ["./*.html", "./partials/**/*.html", "./site.js"],
   safelist: ["bg-amber-400/20"],
   theme: {
     extend: {

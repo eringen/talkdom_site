@@ -6,10 +6,8 @@
   <title>Examples - talkDOM</title>
   <meta name="description" content="Interactive examples and live demos of talkDOM - Smalltalk-inspired message passing for the DOM.">
   <link rel="stylesheet" href="/dist/tailwind.css">
-  <script src="https://cdn.jsdelivr.net/npm/talkdom/dist/talkdom.min.js"></script>
-  <script>
-    talkDOM.methods["toggle:"] = function(el, cls) { el.classList.toggle(cls); };
-  </script>
+  <script src="/talkdom.js"></script>
+  <script src="/site.js" defer></script>
   <script src="https://nanolytica.org/nanolytica.js" data-site-id="68b0c78b-c1f4-4b51-8b28-4daef0df0481" defer></script>
 </head>
 <body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col">
@@ -60,141 +58,136 @@
   </nav>
 
   <main id="content" receiver="content" class="pt-16">
-    <div class="max-w-4xl mx-auto px-6 py-12 space-y-12">
-      <div>
-        <h1 class="text-3xl font-bold text-gray-100 mb-2">Examples</h1>
-        <p class="text-gray-400">Interactive demos powered by talkDOM. Each example runs live on this page.</p>
-      </div>
+<div class="max-w-4xl mx-auto px-6 py-12 space-y-12">
+  <div>
+    <h1 class="text-3xl font-bold text-gray-100 mb-2">Examples</h1>
+    <p class="text-gray-400">Interactive demos powered by talkDOM. Each example runs live on this page.</p>
+  </div>
 
-      <!-- Example 1: Basic GET + Apply -->
-      <div class="border border-gray-800 rounded-lg overflow-hidden">
-        <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
-          <h2 class="text-sm font-semibold text-gray-200">Basic GET + Apply</h2>
-        </div>
-        <div class="p-5 space-y-4">
-          <p class="text-sm text-gray-400">Click the button to fetch content from a partial and insert it into the receiver.</p>
-          <div receiver="demo1" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px]">
-            <span class="text-sm text-gray-500">Content will appear here...</span>
-          </div>
-          <button sender="demo1 get: /partials/demos/hello.html apply: inner" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
-            Load Content
-          </button>
-          <details class="mt-3">
-            <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
-            <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="demo1"&gt;Content will appear here...&lt;/div&gt;
+  <!-- Example 1: Basic GET + Apply -->
+  <div class="border border-gray-800 rounded-lg overflow-hidden">
+    <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
+      <h2 class="text-sm font-semibold text-gray-200">Basic GET + Apply</h2>
+    </div>
+    <div class="p-5 space-y-4">
+      <p class="text-sm text-gray-400">Click the button to fetch content from a partial and insert it into the receiver.</p>
+      <div receiver="demo1" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px]">
+        <span class="text-sm text-gray-500">Content will appear here...</span>
+      </div>
+      <button sender="demo1 get: /partials/demos/hello.html apply: inner" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
+        Load Content
+      </button>
+      <details class="mt-3">
+        <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
+        <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="demo1"&gt;Content will appear here...&lt;/div&gt;
 
 &lt;button sender="demo1 get: /partials/demos/hello.html apply: inner"&gt;
   Load Content
 &lt;/button&gt;</pre>
-          </details>
-        </div>
-      </div>
+      </details>
+    </div>
+  </div>
 
-      <!-- Example 2: Append -->
-      <div class="border border-gray-800 rounded-lg overflow-hidden">
-        <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
-          <h2 class="text-sm font-semibold text-gray-200">Append Content</h2>
-        </div>
-        <div class="p-5 space-y-4">
-          <p class="text-sm text-gray-400">Each click appends new content without removing existing content.</p>
-          <div receiver="demo2" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px] space-y-1">
-          </div>
-          <button sender="demo2 get: /partials/demos/counter.html apply: append" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
-            Append Entry
-          </button>
-          <details class="mt-3">
-            <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
-            <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="demo2"&gt;&lt;/div&gt;
+  <!-- Example 2: Append -->
+  <div class="border border-gray-800 rounded-lg overflow-hidden">
+    <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
+      <h2 class="text-sm font-semibold text-gray-200">Append Content</h2>
+    </div>
+    <div class="p-5 space-y-4">
+      <p class="text-sm text-gray-400">Each click appends new content without removing existing content.</p>
+      <div receiver="demo2" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px] space-y-1">
+      </div>
+      <button sender="demo2 get: /partials/demos/counter.html apply: append" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
+        Append Entry
+      </button>
+      <details class="mt-3">
+        <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
+        <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="demo2"&gt;&lt;/div&gt;
 
 &lt;button sender="demo2 get: /partials/demos/counter.html apply: append"&gt;
   Append Entry
 &lt;/button&gt;</pre>
-          </details>
-        </div>
-      </div>
+      </details>
+    </div>
+  </div>
 
-      <!-- Example 3: Pipe Chain -->
-      <div class="border border-gray-800 rounded-lg overflow-hidden">
-        <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
-          <h2 class="text-sm font-semibold text-gray-200">Pipe Chaining</h2>
-        </div>
-        <div class="p-5 space-y-4">
-          <p class="text-sm text-gray-400">Fetch content with <code class="font-mono text-amber-400/80 text-xs">get:</code> then pipe the result to <code class="font-mono text-amber-400/80 text-xs">apply:</code> in a separate step.</p>
-          <div receiver="demo3" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px]">
-            <span class="text-sm text-gray-500">Waiting for piped content...</span>
-          </div>
-          <button sender="demo3 get: /partials/demos/hello.html | demo3 apply: inner" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
-            Fetch &amp; Apply via Pipe
-          </button>
-          <details class="mt-3">
-            <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
-            <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="demo3"&gt;Waiting for piped content...&lt;/div&gt;
+  <!-- Example 3: Pipe Chain -->
+  <div class="border border-gray-800 rounded-lg overflow-hidden">
+    <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
+      <h2 class="text-sm font-semibold text-gray-200">Pipe Chaining</h2>
+    </div>
+    <div class="p-5 space-y-4">
+      <p class="text-sm text-gray-400">Fetch content with <code class="font-mono text-amber-400/80 text-xs">get:</code> then pipe the result to <code class="font-mono text-amber-400/80 text-xs">apply:</code> in a separate step.</p>
+      <div receiver="demo3" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px]">
+        <span class="text-sm text-gray-500">Waiting for piped content...</span>
+      </div>
+      <button sender="demo3 get: /partials/demos/hello.html | demo3 apply: inner" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
+        Fetch &amp; Apply via Pipe
+      </button>
+      <details class="mt-3">
+        <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
+        <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="demo3"&gt;Waiting for piped content...&lt;/div&gt;
 
 &lt;button sender="demo3 get: /partials/demos/hello.html | demo3 apply: inner"&gt;
   Fetch &amp; Apply via Pipe
 &lt;/button&gt;</pre>
-          </details>
+      </details>
+    </div>
+  </div>
+
+  <!-- Example 4: Parallel Chains -->
+  <div class="border border-gray-800 rounded-lg overflow-hidden">
+    <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
+      <h2 class="text-sm font-semibold text-gray-200">Parallel Chains with Semicolons</h2>
+    </div>
+    <div class="p-5 space-y-4">
+      <p class="text-sm text-gray-400">Update two receivers simultaneously with independent chains separated by <code class="font-mono text-amber-400/80 text-xs">;</code></p>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <span class="text-xs text-gray-500 mb-1 block">Receiver A</span>
+          <div receiver="demo4a" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px]">
+            <span class="text-sm text-gray-500">Empty</span>
+          </div>
+        </div>
+        <div>
+          <span class="text-xs text-gray-500 mb-1 block">Receiver B</span>
+          <div receiver="demo4b" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px]">
+            <span class="text-sm text-gray-500">Empty</span>
+          </div>
         </div>
       </div>
-
-      <!-- Example 4: Parallel Chains -->
-      <div class="border border-gray-800 rounded-lg overflow-hidden">
-        <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
-          <h2 class="text-sm font-semibold text-gray-200">Parallel Chains with Semicolons</h2>
-        </div>
-        <div class="p-5 space-y-4">
-          <p class="text-sm text-gray-400">Update two receivers simultaneously with independent chains separated by <code class="font-mono text-amber-400/80 text-xs">;</code></p>
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <span class="text-xs text-gray-500 mb-1 block">Receiver A</span>
-              <div receiver="demo4a" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px]">
-                <span class="text-sm text-gray-500">Empty</span>
-              </div>
-            </div>
-            <div>
-              <span class="text-xs text-gray-500 mb-1 block">Receiver B</span>
-              <div receiver="demo4b" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px]">
-                <span class="text-sm text-gray-500">Empty</span>
-              </div>
-            </div>
-          </div>
-          <button sender="demo4a get: /partials/demos/hello.html apply: inner; demo4b get: /partials/demos/counter.html apply: inner" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
-            Load Both
-          </button>
-          <details class="mt-3">
-            <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
-            <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="demo4a"&gt;Empty&lt;/div&gt;
+      <button sender="demo4a get: /partials/demos/hello.html apply: inner; demo4b get: /partials/demos/counter.html apply: inner" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
+        Load Both
+      </button>
+      <details class="mt-3">
+        <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
+        <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="demo4a"&gt;Empty&lt;/div&gt;
 &lt;div receiver="demo4b"&gt;Empty&lt;/div&gt;
 
 &lt;button sender="demo4a get: /partials/demos/hello.html apply: inner;
                demo4b get: /partials/demos/counter.html apply: inner"&gt;
   Load Both
 &lt;/button&gt;</pre>
-          </details>
-        </div>
-      </div>
+      </details>
+    </div>
+  </div>
 
-      <!-- Example 5: Custom Methods -->
-      <div class="border border-gray-800 rounded-lg overflow-hidden">
-        <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
-          <h2 class="text-sm font-semibold text-gray-200">Custom Methods</h2>
-        </div>
-        <div class="p-5 space-y-4">
-          <p class="text-sm text-gray-400">Register a custom <code class="font-mono text-amber-400/80 text-xs">toggle:</code> method and use it in sender attributes.</p>
-          <div receiver="demo5" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px] transition-colors">
-            <span class="text-sm text-gray-300">This box will toggle its background color.</span>
-          </div>
-          <button sender="demo5 toggle: bg-amber-400/20" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
-            Toggle Background
-          </button>
-          <script>
-            talkDOM.methods["toggle:"] = function(el, cls) {
-              el.classList.toggle(cls);
-            };
-          </script>
-          <details class="mt-3">
-            <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
-            <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;script&gt;
+  <!-- Example 5: Custom Methods -->
+  <div class="border border-gray-800 rounded-lg overflow-hidden">
+    <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
+      <h2 class="text-sm font-semibold text-gray-200">Custom Methods</h2>
+    </div>
+    <div class="p-5 space-y-4">
+      <p class="text-sm text-gray-400">Register a custom <code class="font-mono text-amber-400/80 text-xs">toggle:</code> method and use it in sender attributes.</p>
+      <div receiver="demo5" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px] transition-colors">
+        <span class="text-sm text-gray-300">This box will toggle its background color.</span>
+      </div>
+      <button sender="demo5 toggle: bg-amber-400/20" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
+        Toggle Background
+      </button>
+      <details class="mt-3">
+        <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
+        <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;script&gt;
 talkDOM.methods["toggle:"] = function(el, cls) {
   el.classList.toggle(cls);
 };
@@ -207,61 +200,94 @@ talkDOM.methods["toggle:"] = function(el, cls) {
 &lt;button sender="demo5 toggle: bg-amber-400/20"&gt;
   Toggle Background
 &lt;/button&gt;</pre>
-          </details>
-        </div>
-      </div>
+      </details>
+    </div>
+  </div>
 
-      <!-- Example 6: Confirm -->
-      <div class="border border-gray-800 rounded-lg overflow-hidden">
-        <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
-          <h2 class="text-sm font-semibold text-gray-200">Confirm Before Action</h2>
-        </div>
-        <div class="p-5 space-y-4">
-          <p class="text-sm text-gray-400">Use <code class="font-mono text-amber-400/80 text-xs">confirm:</code> to gate an action. Cancel aborts the chain.</p>
-          <div receiver="demo6" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px]">
-            <span class="text-sm text-gray-300">Click the button and confirm to replace this content.</span>
-          </div>
-          <button sender="demo6 confirm: Replace content? Are you sure? | demo6 get: /partials/demos/hello.html apply: inner" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
-            Confirm &amp; Load
-          </button>
-          <details class="mt-3">
-            <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
-            <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="demo6"&gt;
+  <!-- Example 6: Loading State -->
+  <div class="border border-gray-800 rounded-lg overflow-hidden">
+    <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
+      <h2 class="text-sm font-semibold text-gray-200">Loading State</h2>
+    </div>
+    <div class="p-5 space-y-4">
+      <p class="text-sm text-gray-400">This site registers a custom <code class="font-mono text-amber-400/80 text-xs">get:apply:loading:</code> method to toggle a CSS class on the receiver during async operations.</p>
+      <style>.demo-loading { opacity: 0.5; transition: opacity 0.2s; }</style>
+      <div receiver="demo6a" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px] transition-opacity">
+        <span class="text-sm text-gray-300">This box dims while loading.</span>
+      </div>
+      <button sender="demo6a get: /partials/demos/hello.html apply: inner loading: demo-loading" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
+        Load with Indicator
+      </button>
+      <details class="mt-3">
+        <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
+        <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">talkDOM.methods[&quot;get:apply:loading:&quot;] = function(el, url, op, cls) {
+  el.classList.add(cls);
+  return talkDOM.methods[&quot;get:apply:&quot;](el, url, op)
+    .finally(function() { el.classList.remove(cls); });
+};
+
+&lt;style&gt;.is-loading { opacity: 0.5; }&lt;/style&gt;
+
+&lt;div receiver="demo6a"&gt;This box dims while loading.&lt;/div&gt;
+
+&lt;button sender="demo6a get: /partials/demos/hello.html apply: inner loading: is-loading"&gt;
+  Load with Indicator
+&lt;/button&gt;</pre>
+      </details>
+    </div>
+  </div>
+
+  <!-- Example 7: Confirm -->
+  <div class="border border-gray-800 rounded-lg overflow-hidden">
+    <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
+      <h2 class="text-sm font-semibold text-gray-200">Confirm Before Action</h2>
+    </div>
+    <div class="p-5 space-y-4">
+      <p class="text-sm text-gray-400">Use <code class="font-mono text-amber-400/80 text-xs">confirm:</code> to gate an action. Cancel aborts the chain.</p>
+      <div receiver="demo7" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px]">
+        <span class="text-sm text-gray-300">Click the button and confirm to replace this content.</span>
+      </div>
+      <button sender="demo7 confirm: Replace content? Are you sure? | demo7 get: /partials/demos/hello.html apply: inner" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
+        Confirm &amp; Load
+      </button>
+      <details class="mt-3">
+        <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
+        <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="demo7"&gt;
   Click the button and confirm to replace this content.
 &lt;/div&gt;
 
-&lt;button sender="demo6 confirm: Replace content? | demo6 get: /partials/demos/hello.html apply: inner"&gt;
+&lt;button sender="demo7 confirm: Replace content? | demo7 get: /partials/demos/hello.html apply: inner"&gt;
   Confirm &amp; Load
 &lt;/button&gt;</pre>
-          </details>
-        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Example 8: Programmatic API -->
+  <div class="border border-gray-800 rounded-lg overflow-hidden">
+    <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
+      <h2 class="text-sm font-semibold text-gray-200">Programmatic API</h2>
+    </div>
+    <div class="p-5 space-y-4">
+      <p class="text-sm text-gray-400">Dispatch messages from JavaScript with <code class="font-mono text-amber-400/80 text-xs">talkDOM.send()</code>.</p>
+      <div receiver="demo8" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px]">
+        <span class="text-sm text-gray-500">Waiting for programmatic send...</span>
       </div>
+      <button onclick="talkDOM.send('demo8 get: /partials/demos/hello.html apply: inner')" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
+        talkDOM.send()
+      </button>
+      <details class="mt-3">
+        <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
+        <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="demo8"&gt;Waiting for programmatic send...&lt;/div&gt;
 
-      <!-- Example 7: Programmatic API -->
-      <div class="border border-gray-800 rounded-lg overflow-hidden">
-        <div class="px-5 py-3 bg-gray-900 border-b border-gray-800">
-          <h2 class="text-sm font-semibold text-gray-200">Programmatic API</h2>
-        </div>
-        <div class="p-5 space-y-4">
-          <p class="text-sm text-gray-400">Dispatch messages from JavaScript with <code class="font-mono text-amber-400/80 text-xs">talkDOM.send()</code>.</p>
-          <div receiver="demo7" class="p-4 bg-gray-900/50 rounded-lg border border-gray-800 min-h-[48px]">
-            <span class="text-sm text-gray-500">Waiting for programmatic send...</span>
-          </div>
-          <button onclick="talkDOM.send('demo7 get: /partials/demos/hello.html apply: inner')" class="px-4 py-2 bg-amber-400 text-gray-950 rounded text-sm font-semibold hover:bg-amber-300 transition-colors">
-            talkDOM.send()
-          </button>
-          <details class="mt-3">
-            <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-300">View Source</summary>
-            <pre class="mt-2 bg-gray-900 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">&lt;div receiver="demo7"&gt;Waiting for programmatic send...&lt;/div&gt;
-
-&lt;button onclick="talkDOM.send('demo7 get: /partials/demos/hello.html apply: inner')"&gt;
+&lt;button onclick="talkDOM.send('demo8 get: /partials/demos/hello.html apply: inner')"&gt;
   talkDOM.send()
 &lt;/button&gt;</pre>
-          </details>
-        </div>
-      </div>
+      </details>
     </div>
-  </main>
+  </div>
+</div>
+</main>
 
 </body>
 </html>
